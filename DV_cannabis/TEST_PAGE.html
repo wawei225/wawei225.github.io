@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/fusioncharts.js"></script>
+	<script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.fusion.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+    <meta charset="utf-8">
+    <title>How does the prevalence of Cannabis affect crime rate and economics in Canada?</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+
+    <!-- Link Swiper's CSS -->
+    <link rel="stylesheet" href="swiper.min.css">
+
+
+    <!-- Demo styles -->
+    <style>
+    html, body {
+        position: relative;
+        height: 100%;
+    }	
+    body {
+        background: #eee;
+        font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        color:#000;
+        margin: 0;
+        padding: 0;
+    }
+    .swiper-container {
+        width: 100%;
+        height: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .swiper-slide {
+        text-align: center;
+        font-size: 18px;
+        background: #fff;
+        /* Center slide text vertically */
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        -webkit-align-items: center;
+        align-items: center;
+    }
+    .swiper-button-next{
+		position: absolute;
+		width: 45px;
+		height: 45px;
+		top: 95%;
+		left: 50%;
+		margin-left: -22.5px;
+		margin-bottom: -22.5px;
+		color: black;
+		transform: rotate(90deg);
+	}
+
+	.swiper-pagination-h{
+		top: 85%; 
+	}
+
+	.swiper-button-prev{
+		
+		position: absolute;
+		width: 45px;
+		height: 45px;
+		top: 5%;
+		left: 50%;
+		margin-left: -22.5px;
+		margin-top: -22.5px;
+		color: black;
+		transform: rotate(90deg);
+	}
+
+	.text_center {
+		position: absolute;
+		top: 5%;
+		left: 16px;
+	}
+	.slide1_header {
+	    height: 100px;
+	    width: 100%; /** Use 100% to fill the width of the page **/
+	    position: absolute;
+	    top: 10%;
+	    left: 0;
+	    right: 0;
+	    margin: 0 auto;
+	    font-size:200%;
+	}
+	.slide1_sub {
+	    height: 100px;
+	    width: 100%; /** Use 100% to fill the width of the page **/
+	    position: fixed;
+	    top: 16%;
+	    left: 0;
+	    right: 0;
+	    margin: 0 auto;
+	    font-size:100%;
+	}
+	.section1 {
+	  float: left;
+	  margin: 0 1.5%;
+	  width: 50%;
+	}
+	.section2 {
+	  float: right;
+	  margin: 0 1.5%;
+	  width: 50%;
+	}
+	.comment_box{
+		position:absolute;
+		bottom:35%; 
+		right:35%;
+  		padding-top:10px;
+  		padding-bottom:10px;
+  		padding-right:10px;
+  		padding-left:10px;
+  		font-size: 100%;
+  		width: 30%;
+	}
+	.comment_box_mid{
+		position:absolute;
+		text-align: left;
+  		padding-top:10px;
+  		padding-bottom:10px;
+  		padding-right:10px;
+  		padding-left:10px;
+  		line-height: 1.5;
+  		width: 65%; 
+  		font-size: 120%;
+	}
+	.comment_box_top{
+		position:absolute;
+		text-align: left;
+  		padding-top:10px;
+  		padding-bottom:10px;
+  		padding-right:10px;
+  		padding-left:10px;
+  		line-height: 1.5;
+  		width: 65%; 
+  		font-size: 150%;
+  		top: 15%; 
+	}
+	.comment_box_bot{
+		position:absolute;
+		text-align: left;
+  		padding-top:10px;
+  		padding-bottom:10px;
+  		padding-right:10px;
+  		padding-left:10px;
+  		line-height: 1.5;
+  		width: 65%; 
+  		font-size: 120%;
+  		top: 70%;
+	}		
+ 	.comment_box_plot{
+		position:absolute;
+		text-align: center;
+  		padding-top:10px;
+  		padding-bottom:10px;
+  		padding-right:10px;
+  		padding-left:10px;
+  		line-height: 1.5;
+  		width: 65%; 
+  		font-size: 150%;
+  		top: 3.5%;
+	}	
+
+	.comment_background{
+	   font-family: 'univers', serif;
+	   background-color:#F5FFFA;
+	   color:#000000
+	}
+	.source_posi{
+		font-size: 65%; 
+		width: 35%;
+		text-align: left;
+		position: absolute;
+		bottom: 5%;
+		left: 5%
+	}
+	.swipe_right{
+		font-size: 75%;
+		position: absolute;
+		bottom: 15%;
+		left: 45%;
+	}
+
+
+    </style>
+</head>
+<body>
+
+
+    <!-- Navigation Bar-->
+    <link rel="stylesheet" href="navbar.css">
+
+	<div class="navbar--container sticky">
+	  <div class="navbar--title"><h4>navigation</h4></div>
+	  <div class="navbar--icon"><i>  &nbsp;&nbsp;&nbsp;&nbsp; | | |</i></div>
+	</div>
+
+	<div class="nav--open close sticky">
+	  <div class="nav--open-icon"><i> X </i></div>
+	  <div class="nav--open-title">Navigation</div>
+	  <div class="nav--open-menu">
+	    <a href="#" id="btn1"><b>Home</b></a> 	
+	    <a href="#" id="btn2"><b>Percentage change in  violent crime rate in Colorado and Canada</b></a>
+	    <a href="#" id="btn3"><b>Percentage change in the major violent crimes in Canada</b> </a>	    
+	    <a href="#" id="btn4"><b>Exploraion on the violent crime rates in Canada</b></a>
+
+	    <a href="#" id="btn5"><b>Prevalence of cannabis among different age groups</b></a>
+	    <a href="#" id="btn6"><b>Percentage change in prevalence of cannabis and violent crime rates</b></a>	    	    
+		<a href="#" id="btn8"><b>Cannabis supply and prevalence of Cannabis</b> </a>	    
+		<a href="#" id="btn9"><b>Percentage change in price factors and prevalance of cannabis</b></a>	    
+		<a href="#" id="btn10"><b>Percentage change in GDP and prevalence of cannabis</b></a>
+		<a href="#" id="btn11"><b>Percentage change in GDP, violent crime rate, and cannabis</b></a>		
+		<a href="#" id="btn12"><b>Conclusion</b></a>
+		<a href="#" id="btn13"><b>Further Reading</b></a>
+	  </div>
+	</div>
+	<script type="text/javascript" src="navbar.js"></script>
+
+
+
+    <!-- Swiper -->
+    <div class="swiper-container swiper-container-v">
+        <div class="swiper-wrapper" style="position: fixed">
+
+        	<!-- Slide 1 -->
+			<div class="swiper-slide comment_background" id = "slide4">         	
+            	<p style="font-size: 200%;position: absolute;top: 40%">
+            		<b>Cannabis, Crime, and Economics </b>
+            	</p>
+            	<p style="font-size: 100%;position: absolute;top: 50%; line-height: 1">
+            		A data-driven exploration of the relationships between the prevalence of cannabis and violent crime rate and economics in Canada.<br/><br/>
+            		How does the prevalence of cannabis affect the violent crime rate and economics in Canada?
+            	</p>          	
+            </div>        	
+        	
+    		<!-- Slide 2 -->
+    		<div class="swiper-slide comment_background" >
+    			
+    				<p class="comment_box_top" style="font-size: 120%">
+    					Cannabis has become one of the most common drugs in our society while the influence of cannabis remains debatable. <br/><br/><span style="color:#7d003e">However, we should replace our fear and misunderstanding with data-supported evidence. </span> <br/><br/><br/><br/>
+    					With organised data from Statistics Canada, we can explore areas where people are concerned with cannabis, <span style="color:#7d003e">the violent crime rate and economics. </span> Understanding these relationships provides insights into <span style="color:#7d003e">prevention of organised crimes and reducing potential threats to societies.  </span>				
+    				</p>
+    				<p class="comment_box_mid" style="position: absolute;top: 50%">
+    					Colorado has similar social and economic background as to that of Canada. Additionally, Colorado legalised cannabis in 2014 which makes it a suitable reference.   
+    				</p>
+    			
+    		</div>    			
+    		
+			<!-- Slide 3 -->
+			<div class="swiper-slide comment_background" id = "slide4">
+            	<div id="chart-container-plot1_test">
+            			<script type="text/javascript" src="test_bar_2.js"></script>
+            	</div>
+            	<p class="comment_box_plot">
+            		<b>What is the trend of violent crime rate in Colorado and Canada? </b>
+            	</p>           	
+            	<p class="source_posi"> <b>
+            							Source: https://www.colorado.gov/pacific/dcj-ors/ors-crimestats</b> <br/>
+            								https://www150.statcan.gc.ca/n1/pub/85-002-x/2019001/article/00013-eng.htm</p>
+            </div> 
+
+			<!-- Slide 4 -->
+			<div class="swiper-slide comment_background">
+			
+					<div class="swiper-wrapper">
+						<div class="swiper-slide comment_background">
+			        		<p class="comment_box_top" style="color: #7f081c">
+			        			<b> What have you noticed from the trend?</b>
+			        		</p>
+		        			<p class="comment_box_mid" style="top: 30%">
+			        			In Colorado, the percentage change  compare to a 10-year average gradually decreased before the cannabis amendment passed and remained steady until cannabis was legalised.
+			        			Interestingly, the <span style="color:#7d003e"> percentage change becomes <b>positive</b></span> since 2015. 
+			        			<br/><br/><br/>
+
+			            		Canada obtains a similar trend where the percentage change decreases from 2008 to 2014 and starts to increase since 2014. However, <span style="color:#7d003e">the percentage change remains negative since 2013.</span> It is important to be aware that the<span style="color:#7d003e"> violent crime rate is lower than a 10-year average.  </span>
+			            	</p>
+			            	<p class="comment_box_bot">
+			            		<b>Overall, are there any specific violent sub-crimes cause the trend in Canada?</b>
+			            	</p>		    						        						        						
+						</div>					
+					</div>								
+			</div>
+
+        	<!-- Slide 6 -->
+            <div class="swiper-slide comment_background">
+				<div id="chart-container-4">
+							<script type="text/javascript" src="sub_crime_2.js"></script>
+            	</div>
+            	<p class="comment_box_plot">
+            		Let's look at the violent sub-crimes and compare different crime rates in Canada!
+            	</p>
+				<p class="comment_box_plot" style=" line-height: 1; top: 70%">
+            		<b>All four types of violent crime rates are <span style="color:#7d003e">decreasing ! </span></b>
+            		<br/>
+            		<span style="font-size: 70%; text-align: left"> More explicitly, the <b><i>total robbery</i></b> significantly decreased since 2008 but slows down after 2014; conversely, the <b><i>total drug violation</i></b> does not change a lot since 2008 but has been decreasing since 2011.
+            		 However, are these changes due to the prevalence of cannabis?</span>
+            	</p>
+            	<p class="source_posi"> <b>Source: https://www150.statcan.gc.ca/t1/tbl1/en/cv.action?pid=3510017701#timeframe</b></p>       
+            </div>
+
+            <!-- Slide 5 -->
+            <div class="swiper-slide comment_background" >
+            	<p class="comment_box_plot" >
+	            	<b>Explore it yourself!</b> <br/>
+	            	<span style="font-size: 70%"><b> Do you agree with the result? </b></span>
+            	</p>
+
+            	<iframe src="https://public.tableau.com/shared/8ZT5D88NY?:display_count=y&amp;:origin=viz_share_link:showVizHome=no&amp;:embed=true" width = "75%" height="70%" style="float:right; border:  none;position: absolute;left: 25%;top: 20%"></iframe>
+
+            </div>
+
+            <!-- Slide 7 -->
+            <div class="swiper-slide comment_background" id = "slide14">
+				<div class="text_center" style="position: absolute;top: 8%;left: 10%">
+					<label id="label" ><b>Select a frequency:</b>
+					    <select id="set_json_data">
+					        <option value="LessThanOnce">Less than once per month</option>
+					        <option value="Once">At least once per month</option>
+					        <option value="ThreeMonth">One to three times per month</option>
+					        <option value="OnceWeek">At least once per week</option>
+					        <option value="Daily">Daily</option>
+					    </select>
+					</label>
+				</div class="comment_background">
+			  	<div id="chart-container-5">
+			  		<script type="text/javascript" src="age_group.js"></script>
+			    </div>
+			
+			    <p class="comment_box_plot" style="width: 35%">
+	            		<b>Let's look at the prevalence of cannabis !</b>
+	            </p>			    
+				<p class="source_posi"> <b>Note: cannabis prevalence is measured and refered as the rate of consuming cannabis under different frequencies <br/> Source: https://www150.statcan.gc.ca/t1/tbl1/en/cv.action?pid=3610059701#timeframe</b></p>    
+
+            </div>
+
+            <!-- Slide 8 -->
+			<div class="swiper-slide comment_background">
+					
+							<p class="comment_box_top">
+							  	Did you notice that the prevalence of cannabis is <span style="color:#7d003e"><b>slightly increasing!</b></span>
+						  	</p>											
+							<p class="comment_box_mid" style="top: 30%">
+								Cannabis use prevalence <span style="color:#7d003e">increase among adults aged 25 to 64;</span> in contrast, the use prevalence decreased among 15 to 17-year-olds.
+								The increasing use of cannabis in aged 25 and older, requires additional exploration to better understand preferences; however, the trend uncover that <span style="color:#7d003e">there are more <i>aged</i> cannabis users today than in the past.</span>
+								<br/>
+								<br/>
+								One possible reason of the observed trend are due to more accurate reporting by a population more sensitive to the disclosure of formerly illegal drug use (legalisation of cannabis).
+								<br/>
+								<br/>
+								<br/>
+
+						  		For each group, the prevalence of cannabis obtains similar trends for different frequencies of consuming; therefore, we will <b>accumulate the consuming rate of different frequencies.</b> Then, we will compare the prevalence of cannabis to violent crime rate of each age group (without separated into different frequencies). 
+						  		<br/><br/>
+						  		We utilise percentage change again to compare series with different measurements.
+						  	</p>												
+			</div>
+
+
+			<!-- Slide 9 -->
+            <div class="swiper-slide comment_background" id="slide17" >
+				<div id="chart-container-7-2">
+            		<script type="text/javascript" src="accumulate_percentage_age.js"></script>
+            	</div>
+				<p class="comment_box_plot">
+            		<b>What is the correlation between crime and prevalence of cannabis? </b>
+            	</p>            	
+            	<p class="source_posi"> <b>Note: cannabis prevalence is measured and refered as the rate of consuming cannabis under different frequencies <br/>Source: https://www150.statcan.gc.ca/t1/tbl1/en/cv.action?pid=3610059701#timeframe</b></p>
+            </div>            
+
+            <!-- Slide 10 -->            
+            <div class="swiper-slide comment_background">
+            	<p class="comment_box_top">
+            		Interestingly, for age above 25, percentage changes of the total violent crime rate and the prevalence of cannabis has a <span style="color:#7d003e"><b>negative</b> relationship ! </span> 
+            	</p>
+            	<p class="comment_box_mid" style="top: 35%">
+            		There are no significant changes of prevalence of cannabis for aged 18 to 24. The percentage changes of prevalence of cannabis is negative for aged 15 to 17. The result also supports our observation from previous chart! 
+            		<br/>
+            		<br/>
+            		<br/>
+            		<br/>            		
+
+            		For age above 25, a possible reason of observing the negative relationship is that, as Anderson and Rees (2014) point out, <b><i>“there is evidence of a link between alcohol abuse and violent crime, including domestic violence [... ]. If the legalization of recreational marijuana leads to reduced alcohol consumption, we expect violent crime to fall.”(p. 228).</i></b>
+            	</p>
+            </div>
+
+            <!-- Slide 11 -->            
+            <div class="swiper-slide comment_background">
+            	<p class="comment_box_top">
+            		<b>What have we learned so far? </b>
+            	</p>
+            	<p class="comment_box_mid" style="top: 25%">
+            		For age above 25, prevalence of cannabis and violent crime rate obtain <span style="color:#7d003e"> opposite trend!</span>
+            		On the opposite, for age 15 to 17, prevalence of cannabis and violent crime rate obtain a similar trend. <br/>
+            		There are no significant changes for age 18 to 24.
+            		<br/>
+            		<br/>
+            		<br/>
+            		Now, we have a brief picture of the relationship between the prevalence of cannabis and crime rate. 
+            		<br/>
+            		However, how does the prevalence of cannabis affect my life? my wealth? or the economics in Canada? 
+	            	<br/>
+	            	<br/>
+	            	<br/>
+
+	            	<b>Let's look at economic factors !</b> <br/>
+            	</p>            	
+            	<p class="comment_box_mid" style="position: absolute;font-size: 90%;width: 25%;left: 5%;bottom: 5%">
+            		The population of age below 25 for prevalence of cannabis is less than 10%. Because of the small population and neutral change from age 18 to 24, we only consider data for age above 25 in the rest of the exploration. 
+            	</p>
+            </div>
+
+            <!-- Slide 12 -->
+            <div class="swiper-slide comment_background" id = "slide20">
+				<div id="chart-container-sup-pre-2">
+            		<script type="text/javascript" src="supply_prevalence_3.js"></script>
+            	</div>
+				<p class="comment_box_plot">
+            		<b>What is the correlation between cannabis supply and prevalence of cannabis? </b>
+            	</p>             	
+            	<p class="source_posi"> <b>Note: cannabis prevalence is measured and refered as the rate of consuming cannabis under different frequencies <br/>Source: https://www150.statcan.gc.ca/t1/tbl1/en/cv.action?pid=3610059701#timeframe<br/>
+            								https://www150.statcan.gc.ca/t1/tbl1/en/cv.action?pid=3610060001#timeframe</b></p>
+            	<p style="position: absolute;top: 42%;right: 20%;color: #DE542C;font-size: 75%">
+            		<b>Cannabis Act Passed</b>
+            	</p>
+            </div>   
+
+            <!-- Slide 13 -->            
+            <div class="swiper-slide comment_background">
+            	<p class="comment_box_mid" style="position: absolute;top: 15%">
+            		Did you notice that cannabis supply and prevalence of cannabis move from relatively low to relatively high? (from bottom left to top right) <br/>
+            		<br/>
+            		<br/>
+            		<br/>
+            		Additionally, the cannabis supply has <span style="color:#7d003e"><b>significantly increased. </b></span>
+
+            		A possible reason is that the market <i><b>anticipates an increase in demand </b></i>due to the legalisation of cannabis; therefore, suppliers are likely to <b>increase their inventory </b>which increase the supply. The shifts of cannabis supply and the prevalence of cannabis coherence with economics theories.
+            		<br/>
+            		<br/>
+            		<br/>
+            		<br/>
+
+            		The cannabis supply response to the prevalence of cannabis significantly. <b>Will the consumer and producer price respond in the same way? </b>
+            	</p>            	
+            </div>
+
+            <!-- Slide 14 -->
+            <div class="swiper-slide comment_background" id = "slide25">
+				<div id="chart-container-11-2">
+            		<script type="text/javascript" src="price_prevalence_percentage.js"></script>
+            	</div>
+				<p class="comment_box_plot">
+            		<b>What is the correlation between price and prevalence of cannabis? </b>
+            	</p>             	
+            	<p class="source_posi"> <b>Note: cannabis prevalence is measured and refered as the rate of consuming cannabis under different frequencies <br/>Source: https://www150.statcan.gc.ca/t1/tbl1/en/cv.action?pid=3610059701#timeframe<br/>
+            								https://www150.statcan.gc.ca/t1/tbl1/en/cv.action?pid=3610059801#timeframe</b></p>            	
+            </div>                        
+
+
+
+            <!-- Slide 15 -->            
+            <div class="swiper-slide comment_background">
+            	<p class="comment_box_top">
+            		Both consumer and producer prices decreased in the past 3 to 5 years ! <br/>
+            	</p>
+            	<p class="comment_box_mid" style="top: 25%">
+            		Based on economy theories, <span style="color:#7d003e"> increase in the supply results in a decrease in the price </span> which is indirectly linked to the anticipation of legalisation on cannabis. 
+            		<br/>
+            		<br/>
+            		<br/>
+            		<br/>
+            		<br/>         
+            		<br/>
+            		<br/>
+            		<br/>               		   		            		            		
+            		<span style="color:#7d003e; font-size: 110%"><b>How much do these changes associate with Gross Domestic Product (GDP)? </b></span><br/>
+            		<br/>
+            		<br/>
+            		Many economics activities related to cannabis such as households' consumption, or intermediate purchases. Therefore, the gross domestic product (GDP) provides a general index for evaluating these economics activities.            		
+            	</p>   
+				<p class="comment_box_mid" style="top: 35%; font-size: 120%">
+	            		Now, we have uncovered some <span style="color:#7d003e"><b>potential </b></span>correlations between supply, price, and prevalence of cannabis. <br/>
+	            		<ul class="comment_box_mid" style=" line-height: 1.2; top: 40%; left: 20%">
+	            			<li>Anticipation of cannabis legalisation <i>leads to the increase </i>in the prevalence of cannabis</li>
+	            			<li>Increase in the prevalence of cannabis <i>leads to the decrease </i>in violent crime rate</li>
+	            			<li>Increase in the prevalence of cannabis <i>leads to the increase </i>in cannabis supply</li>
+	            			<li>Increase in cannabis supply <i>leads to the decrease </i>in cannabis price</li>
+	            		</ul>
+            	</p>            	         	
+            </div>
+
+            <!-- Slide 16 -->
+            <div class="swiper-slide comment_background" id = "slide23">
+				<div id="chart-container-10-2">
+            		<script type="text/javascript" src="GDP_prevalence_percentage.js"></script>
+            	</div>
+				<p class="comment_box_plot" style=" line-height: 1; top: 70%; font-size: 120%; text-align: left;">
+					There is a <span style="color:#7d003e"><b>significant increase </b></span>on GDP in 2018 which is highly associated with cannabis related activities such as consumption, production, and use of prevalence. 
+					 The increase in GDP reflects that Canada produced more value of goods and services in 2018 compared to previous year.
+            	</p>
+
+            	<p class="source_posi"> <b>Note: cannabis prevalence is measured and refered as the rate of consuming cannabis under different frequencies <br/>Source: https://www150.statcan.gc.ca/t1/tbl1/en/cv.action?pid=3610059701#timeframe<br/>
+            								https://www150.statcan.gc.ca/t1/tbl1/en/cv.action?pid=3610060001#timeframe</b></p>            	
+            </div>	
+          
+
+
+            <!-- Slide 17 -->
+            <div class="swiper-slide comment_background" id = "slide23">
+            	<div id="chart-container-final">
+            			<script type="text/javascript" src="final_merged.js"></script>
+            	</div>
+            	<p class="comment_box_plot" style="width: 85%">
+            		<b>What are the relationships between the prevalence of cannabis and the violent crime rate and the economics in Canada?</b>
+            		
+            	</p>
+            	<p class="comment_box_mid" style="bottom: 15%">
+
+            		We can observe an <span style="color:#7d003e">increase in the prevalence of cannabis</span> among major age groups and and <span style="color:#7d003e">increase in the GDP</span> while the major types of <span style="color:#7d003e">violent crime rates decrease.</span> (the measurement is the percentage change relatievely to a 10-year average values).  The correlations between the GDP and the prevalence of cannabis changes a lot after 2014. In contrast, the prevalence of cannabis and the major violent crime rate seems to have a negative correlations ! 
+            		<br/>
+
+            		<span style="font-size: 130%"><b> Does this result change your opinions about cannabis?  </b></span>
+            		
+            	</p>
+
+            	<p class="source_posi"> 
+            		<b>Note: cannabis prevalence is measured and refered as the rate of consuming cannabis under different frequencies <br/>
+            			Source: https://www150.statcan.gc.ca/t1/tbl1/en/cv.action?pid=3610059701#timeframe<br/>
+            					https://www150.statcan.gc.ca/t1/tbl1/en/cv.action?pid=3610060001#timeframe<br/>
+            					https://www150.statcan.gc.ca/t1/tbl1/en/cv.action?pid=3510017701#timeframe
+            		</b>
+            	</p>        	
+            </div>	
+         
+
+
+            <!-- Slide 19 -->
+            <div class="swiper-slide comment_background" id = "slide28">
+				<p style="text-align: left;position: absolute;width: 85%">
+            	<b>Coding source and demo </b><br/>
+            	<br/>
+            	https://codepen.io/juliepark/pen/bJGvyP<br/>
+            	https://www.fusioncharts.com/<br/>
+            	https://swiperjs.com/ <br/>
+            	<br/>
+            	<b>Reference</b><br/>
+            	<br/>
+            	[1] “Cannabis,” World Health Organization, 07-Dec-2010. [Online]. Available: https://www.who.int/substance_abuse/facts/cannabis/en/. [Accessed: 23-Nov-2019]. <br/>
+				[2] “Canada,” Wikipedia, 25-Nov-2019. [Online]. Available: https://en.wikipedia.org/wiki/Canada. [Accessed: 23-Nov-2019].<br/>
+				[3] “Cannabis in Canada,” Wikipedia, 21-Nov-2019. [Online]. Available: https://en.wikipedia.org/wiki/Cannabis_in_Canada. [Accessed: 23-Nov-2019].<br/>
+				[4] Gavrilova, E., Kamada, T., & Zoutman, F. (2019). Is Legal Pot Crippling Mexican Drug Trafficking Organisations? The Effect of Medical Marijuana Laws on US Crime. The Economic Journal, 129(617), 375-407.<br/>
+				[5] Auriol, Emmanuelle and Mesnard, Alice and Perrault, Tiffanie, Defeating Crime? An Economic Analysis of Cannabis Legalization Policies (June 2019). CEPR Discussion Paper No. DP13814. Available at SSRN: https://ssrn.com/abstract=3428334<br/>
+				[6] “The National Cannabis Economy - December 2018,” Dec-2018. [Online]. Available: https://www.jec.senate.gov/public/_cache/files/bf473de9-98bb-4465-a310-de992926409a/national-cannabis-economy-final.pdf. [Accessed: 23-Nov-2019].<br/>
+				[7]Statistics Canada: Canada's national statistical agency / Statistique Canada : Organisme statistique national du Canada. [Online]. Available: https://www150.statcan.gc.ca/. [Accessed: 20-Nov-2019].<br/>
+				[8]Crime Statistics,” Division on Criminal Justice – Office of Research and Statistics, 26-Aug-2019. [Online]. Available: https://www.colorado.gov/pacific/dcj-ors/ors-crimestats. [Accessed: 21-Nov-2019].
+				</p>
+            </div>
+
+   
+    
+
+            
+        </div>
+
+        <!-- Add Pagination -->
+        <div class="swiper-pagination swiper-pagination-v"></div>
+    </div>
+
+	<!-- navigation buttons -->
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+
+    <!-- Swiper JS -->
+    <script src="swiper.min.js"></script>
+
+
+    <!-- Initialize Swiper -->
+    <script>
+    var swiperV = new Swiper('.swiper-container-v', {
+        direction: 'vertical',
+        slidesPerView: 1,
+        spaceBetween: 35,
+        mousewheel: true,
+        pagination: {
+          el: '.swiper-pagination-v',
+          clickable: true,
+        },
+		navigation: {
+        	nextEl: '.swiper-button-next',
+        	prevEl: '.swiper-button-prev',
+	    },
+	    keyboard: {
+	      enabled: true,
+	    },      
+    })
+    $('#btn1').click(function(){
+		swiperV.slideTo(0, 1000, false);
+	})
+    $('#btn2').click(function(){
+		swiperV.slideTo(2, 1000, false);
+	})
+    $('#btn3').click(function(){
+		swiperV.slideTo(4, 1000, false);
+	})
+    $('#btn4').click(function(){
+		swiperV.slideTo(5, 1000, false);
+	})
+    $('#btn5').click(function(){
+		swiperV.slideTo(6, 1000, false);
+	})
+    $('#btn6').click(function(){
+		swiperV.slideTo(8, 1000, false);
+	})
+
+    $('#btn8').click(function(){
+		swiperV.slideTo(11, 1000, false);
+	})
+    $('#btn9').click(function(){
+		swiperV.slideTo(13, 1000, false);
+	})
+    $('#btn10').click(function(){
+		swiperV.slideTo(15, 1000, false);
+	})
+    $('#btn11').click(function(){
+		swiperV.slideTo(16, 1000, false);
+	})
+    $('#btn12').click(function(){
+		swiperV.slideTo(16, 1000, false);
+	})	
+    $('#btn13').click(function(){
+		swiperV.slideTo(17, 1000, false);
+	});
+
+
+    var swiperH = new Swiper('.swiper-container-h', {
+      spaceBetween: 50,
+      
+      autoplay: {
+        delay: 10000,
+        disableOnInteraction: false,
+        stopOnLastSlide: false,
+        waitForTransition:false,
+      },
+
+      pagination: {
+        el: '.swiper-pagination-h',
+        clickable: true,
+      },
+      navigation: {
+        	HnextEl: '.swiper-button-next',
+        	HprevEl: '.swiper-button-prev',
+      },
+      keyboard: {
+        enabled: true,
+      },      
+    })  
+
+
+    </script>
+
+</body>
+</html>
