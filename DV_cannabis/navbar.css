@@ -1,0 +1,126 @@
+@import url('https://fonts.googleapis.com/css?family=Abril+Fatface|Oswald:200,400|Playfair+Display:400,400i');
+ body {
+   margin: 0;
+   background: #b2d2c8;
+}
+ a {
+   text-decoration: none;
+   color: #92bfb1;
+}
+ a:hover {
+   background: #92bfb1;
+   color: #333;
+}
+ .sticky {
+   position: fixed;
+   z-index: 10;
+}
+ .navbar--container {
+   top: 15%;
+   background: #fff;
+   height: 220px;
+   width: 90px;
+   box-shadow: 15px 15px 15px rgba(51, 51, 51, .1);
+}
+ .navbar--icon {
+   margin-top: 35px;
+   margin-left: 17px;
+   font-size: 1em;
+   transform: rotate(90deg);
+}
+ .navbar--icon:hover {
+   color: #92bfb1;
+   cursor: pointer;
+}
+ .navbar--title {
+   margin-left: 27px;
+   margin-top: 35px;
+}
+ .navbar--title h4 {
+   writing-mode: vertical-rl;
+   font-family: 'Oswald', sans-serif;
+   letter-spacing: 0.34em;
+   text-transform: uppercase;
+   font-size: 0.9em;
+}
+ .nav--open {
+   height: 100vh;
+   width: 300px;
+   background: #fff;
+   transition: all 0.4s ease-out;
+   opacity: 1;
+   box-shadow: 10px 10px 15px rgba(51, 51, 51, .1);
+}
+ .nav--open-icon {
+   text-align: right;
+   padding: 20px;
+}
+ .nav--open-icon i {
+   font-size: 1.8em;
+   color: #92bfb1;
+}
+ .nav--open-icon i:hover {
+   color: #333;
+   cursor: pointer;
+}
+ .nav--open-title {
+   font-family: 'Playfair Display', serif;
+   font-size: 1em;
+   text-transform: uppercase;
+   letter-spacing: 0.2em;
+   text-align: center;
+   margin-top: 10%;
+}
+ .nav--open-menu {
+   height: 100%;
+   display: flex;
+   flex-direction: column;
+   text-align: center;
+   margin-top: 15px;
+}
+ .nav--open-menu a {
+   font-size: 1em;
+   font-weight: 100;
+   font-family: 'Playfair Display', serif;
+   padding: 10px 0;
+}
+ .close {
+   transform: translateX(-300px);
+   transition: all 0.4s ease-out;
+   opacity: 0;
+}
+ section {
+   height: 100vh;
+   width: 100%;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   flex-direction: column;
+}
+ .two {
+   background: #8fbdaf;
+}
+ .three {
+   background: #72ac9a;
+}
+ h1 {
+   font-family: 'Abril Fatface', serif;
+   margin: 0;
+   line-height: 1em;
+   font-weight: 100;
+   color: #fff;
+   font-size: 3.5em;
+}
+ h1 span {
+   font-style: italic;
+   text-decoration: underline;
+   color: #72ac9a;
+}
+ .light {
+   color: #b2d2c8;
+}
+ .underline {
+   text-decoration: underline;
+}
+
+
