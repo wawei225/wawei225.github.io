@@ -1,207 +1,157 @@
-<!DOCTYPE HTML>
-<!--
-	Hielo by TEMPLATED
-	templated.co @templatedco
-	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
--->
-<html>
-	<head>
-		<title>Jerry Huang</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-	</head>
-	<body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jerry Huang's Portfolio</title>
 
-		<!-- Header -->
-			<header id="header" class="alt">
-				<div class="logo"><a href="index.html">Jerry Huang </a></div>
-				<a href="#menu" style="color: #000">Menu</a>
-			</header>
+    <!-- Link to CSS -->
+    <link rel="stylesheet" href="styles/css/styles.css">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 
-		<!-- Nav -->
-			<nav id="menu">
-				<ul class="links">
-					<li><a href="#">Home</a></li>
-					<li><a href="#about_me">About Me</a></li>
-					<li><a href="#projects">Projects</a></li>
-					<li><a href="#contacts">Contacts</a></li>
-				</ul>
-			</nav>
+</head>
+<body>
+	<!-- Header -->
+	<header class="main-header">
+	    <div class="logo">
+	        <img src="styles/images/export.jpeg" alt="Logo Image" class="logo-img">
+	        <a href="index.html">Jerry Huang</a>
+	    </div>
+	    <nav>
+	        <ul class="nav-links">
+	            <li><a href="#projects">Projects</a></li>
+	            <li><a href="photography.html">Photography</a></li>
+	            <!--<li><a href="#blogs">Blogs</a></li> -->
+	            <li><a href="#about-me">About Me</a></li>
+	            <li><a href="#contacts">Contacts</a></li>
+	        </ul>
+	    </nav>
+	</header>
 
+    <!-- Banner Section -->
+	<section class="banner full">
+	    <div class="inner">
+	        <div class="text-content">
+	            <p>
+	                Hi, my name is Jerry Huang. <br>
+	                I am a data analyst, and <br>
+	                a coffee enthusiast.
+	            </p>
+	        </div>
+	        <!-- Resume Button -->
+	        <div class="resume-button">
+	            <a href="resume.pdf" target="_blank" class="button">Resume</a>
+	        </div>
+	    </div>
+	</section>
 
+    <!-- GIF Section -->
+    <section class="cat-animation">
+        <img src="styles/running_cat.webp" alt="Animated GIF" class="running-cat">
+    </section>
 
-		<!-- Home -->
-			<section class="banner full">
-				<article>
-					
-					<div class="inner", id="home" >
-						<header>
-							<p>Hi, my name is Jerry Huang. <br> I am a data analyst, and <br> a coffee enthusiast.</p>
-						</header>
-					</div>
-				</article>
-				
-			</section>
+    <!-- Content Sections -->
+    <main>
+        <section id="about-me">
+            <h1 class = "section-title">About me</h1>
+            <div class="section-description">	
+            	<p>  
+            		Self-motivated and detail-oriented data analyst with experience in optimizing user experiences via A/B testing and creating concise reports to deliver actionable findings. Proven ability to solve business problems through statistical analysis, machine learning and reporting in both e-commerce and SaaS environments. Thrives on embracing new intellectual challenges.
+            	</p>
+            </div>
+        </section>
 
-		<!-- About Me -->
+        <section id="projects">
+            <h1 class = "section-title">Projects</h1>
+            <div class="projects-container">	
+        <!-- Project 1 -->
+			    <div class="project-box">
+	        		<img src="project_image/pic_RIPS.png" alt="TDA">
 
-			<section id="about_me" class="wrapper style3" style="background-image: url(images/ocean_sunset.jpg); background-size: cover;"  >								
-				<div class="inner">
-					<div class="grid-style">
-						<div>
-							<div class="box">
-								<div class="content">
-									<header class="align-center">
-										<h2>About Me</h2>
-									</header>
-									<p>  Self-motivated and detail-oriented data analyst with experience in optimizing user experiences via A/B testing and creating concise reports to deliver actionable findings. Proven ability to solve business problems through statistical analysis, machine learning and reporting in both e-commerce and SaaS environments. Thrives on embracing new intellectual challenges.</p>
-								</div>
-							</div>
-							<div class="box2"  style="top: 17vw">
-								<div class="content">
-									<footer class="align-center">
-										<a href="https://drive.google.com/file/d/15uSsztDJAEeC5p_aGlGZKk8recGI3Ec9/view?usp=sharing" class="button alt" style="width: 15vw;background-color: white">Resume</a>
-									</footer>
-								</div>							
-						</div>
-					</div>
-				</div>
+			    	<p class = "project-title">Topological Data Analysis</p>
+					<div class="project-skills">
+		            	<span class="project-skill">Machine Learning</span>
+    		    		<span class="project-skill">Topological Data Analysis</span>
+    				</div>			   
+	            	<p class="project-description">
+	                	An implementation of the topological data analysis in clustering and classifying univariate time series dataset.
+	            	</p>
 
-			</section>
+        			<a href="https://github.com/wawei225/TDA-Project/blob/main/TDA_report.pdf" class="learn-more">Learn More</a>
+        		</div>
+		<!-- Project 2 -->
+			    <div class="project-box">
+	        		<img src="project_image/fraud_umap.png" alt="credit-fraud">
 
-		<!-- Projects -->
-			<section id="projects" class="wrapper style2">
-				
-				<div class="inner">
+			    	<p class = "project-title">Credit fraud detection with data mining</p>
+	    			<div class="project-skills">
+            			<span class="project-skill">Machine Learning</span>
+ 		           		<span class="project-skill">Credit Scoring</span>
+ 		           		<span class="project-skill">Python</span>
+        			</div>		    	
+	            	<p class="project-description">
+	                	Performed data wrangling and modeled probability of fraud with data mining techniques in R.
+	            	</p>
 
-					<header class="align-center">
-						
-						<h2>Projects</h2>
-					</header>
+        			<a href="https://github.com/wawei225/credit_fraud_detection/blob/main/credit_scoring_report.pdf" class="learn-more">Learn More</a>
+        		</div>
 
-					<div class="grid-style">
+		<!-- Project 3 -->
+			    <div class="project-box">
+	        		<img src="project_image/pic_cannabis.png" alt="cannabis">
 
-						<div>
-							<div class="box" style="height: 40rem">
-								<div class="image fit">
-									<img src="images/pic_RIPS.png" alt="" />
-								</div>
-								<div class="content">
-									<header class="align-center">
-										<h2>Topological Data Analysis</h2>
-									</header>
-									<p> An implementation of the topological data analysis in clustering and classifying univariate time series dataset.</p>
-									<footer class="align-center">
-										<a href="https://github.com/wawei225/TDA-Project/blob/main/TDA_report.pdf" class="button alt">Learn More</a>
-										<a href="TDA/TDA_project.html" class="button alt">Codes (Jupyter)</a>
-									</footer>
-								</div>
-							</div>
-						</div>
+			    	<p class = "project-title">Cannabis, Crime, and Economics</p>
+	    			<div class="project-skills">
+            			<span class="project-skill">Data visualization</span>
+        			</div>		    	
+	            	<p class="project-description">
+	                	A data storytelling webpage in providing insights in the relationship between cannabis and crime and economics.
+	            	</p>
 
-						<div>
-							<div class="box" style="height: 40rem">
-								<div class="image fit">
-									<img src="images/fraud_umap.png" alt="" />
-								</div>
-								<div class="content">
-									<header class="align-center">
-										<h2>Credit fraud detection with data mining</h2>
-									</header>
-									<p> Performed data wrangling and modeled probability of fraud with data mining techniques in R.</p>
-									<footer class="align-center">
-										<a href="https://github.com/wawei225/credit_fraud_detection/blob/main/credit_scoring_report.pdf" class="button alt">Learn More</a>
-										<a href="credit_scoring/fraud_detection.html" class="button alt">Codes (R)</a>
-									</footer>
-								</div>
-							</div>
-						</div>
+        			<a href="DV_cannabis/index.html" class="learn-more">Learn More</a>
+        		</div>
 
-						<div>
-							<div class="box" style="height: 40rem">
-								<div class="image fit">
-									<img src="images/pic_cannabis.PNG" alt="" />
-								</div>
-								<div class="content">
-									<header class="align-center">
-										<h2>Cannabis, Crime, and Economics</h2>
-									</header>
-									<p> A data storytelling webpage in providing insights in the relationship between cannabis and crime and economics.</p>
-									<footer class="align-center">
-										<a href="DV_cannabis/index.html" class="button alt">Learn More</a>
-									</footer>
-								</div>
-							</div>
-						</div>
+		<!-- Project 4 -->
+			    <div class="project-box">
+	        		<img src="project_image/pic_coffee.png" alt="coffee-production">
 
-						<div>
-							<div class="box" style="height: 40rem">
-								<div class="image fit">
-									<img src="images/pic_coffee.png" alt="" />
-								</div>
-								<div class="content">
-									<header class="align-center">
-										<h2>Estimation of coffee production</h2>
-									</header>
-									<p> Collected and organised multiple datasets and established regression model in estimating the influence of weather determinants on total coffee production.</p>
-									<footer class="align-center">
-										<a href="https://github.com/wawei225/Coffee_production/blob/master/Coffee%20Final%20report.pdf" class="button alt">Learn More</a>
-									</footer>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</section>
+			    	<p class = "project-title">Estimation of coffee production</p>
+	    			<div class="project-skills">
+            			<span class="project-skill">Machine Learning</span>
+ 		           		<span class="project-skill">Credit Scoring</span>
+ 		           		<span class="project-skill">Python</span>
+        			</div>		    	
+	            	<p class="project-description">
+	                	Collected and organised multiple datasets and established regression model in estimating the influence of weather determinants on total coffee production.
+	            	</p>
 
+        			<a href="https://github.com/wawei225/Coffee_production/blob/master/Coffee%20Final%20report.pdf" class="learn-more">Learn More</a>
+        		</div>        		        		
+	    	</div>
+		</section>  
 
+        <section id="contacts">
+            <h1 class = "section-title">Contacts</h1>
+		    <div class="contact-icons">
+		        <a href="mailto:hw.huang0225@gmail.com" class="contact-icon">
+		            <i class="fas fa-envelope"></i>
+		        </a>
+		        <a href="https://www.linkedin.com/in/jerryhuang84/" target="_blank" class="contact-icon">
+		            <i class="fab fa-linkedin"></i>
+		        </a>
+		        <a href="https://github.com/wawei225" target="_blank" class="contact-icon">
+		            <i class="fab fa-github"></i>
+		        </a>
+		    </div>
+        </section>
 
+	<!-- Footer -->
+		<footer id="footer">
+			<p>Copyright &#169; 2024 Jerry Huang. All Rights Reserved.</p>
+		</footer>
+    </main>
 
-
-		<!-- Contacts -->
-			<section id="contacts" class="wrapper style3">
-
-				<div class="inner">
-					<div class="grid-style">
-						<div>
-							<div class="box" style="left: 10vw">
-								<div class="content">
-									<header class="align-center">
-										<h2>Contacts</h2>
-									</header>									
-
-									<ul class="icons" style="position: relative;left: 18vw; letter-spacing: 3rem">
-										<li><a href="mailto:hw.huang0225@gmail.com" class="icon fa-envelope-o"><span class="label">Email</span></a></li> 
-										<li><a href="https://www.linkedin.com/in/hua-wei-huang/" class="icon fa-linkedin"><span class="label">LinkedIn</span></a></li> 
-										<li><a href="https://github.com/wawei225" class="icon fa-github"><span class="label">Github</span></a></li> 
-									</ul>									
-
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-			</section>
-
-		<!-- Footer -->
-			<footer id="footer">
-				<div class="container">
-					<p style="color: white">This webpage is modified from the template, <a href="https://templated.co/hielo">Hielo, by TEMPLATED</a></p>
-
-				</div>
-				<div class="copyright">
-					&copy; 2022 Hua-Wei Huang. All rights reserved.
-				</div>
-			</footer>
-
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.scrollex.min.js"></script>
-			<script src="assets/js/skel.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
-
-	</body>
+    <!-- Link to JavaScript -->
+    <script src="styles/java/script.js"></script>
+</body>
 </html>
