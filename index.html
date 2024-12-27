@@ -6,7 +6,7 @@
     <title>Jerry Huang's Portfolio</title>
 
     <!-- Link to CSS -->
-    <link rel="stylesheet" href="../styles/css/styles.css">
+    <link rel="stylesheet" href="styles/css/styles.css">
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 
 </head>
@@ -14,14 +14,19 @@
 	<!-- Header -->
 	<header class="main-header">
 	    <div class="logo">
-	        <img src="../styles/images/export.jpeg" alt="Logo Image" class="logo-img">
-	        <a href="index.html">Jerry Huang</a>
+	        <a href="index.html" class="logo-link">
+	            <img src="styles/images/export.jpeg" alt="Logo Image" class="logo-img">
+	            Jerry Huang
+	        </a>
 	    </div>
-	    <nav>
-	        <ul class="nav-links">
+	    <button class="menu-toggle" aria-label="Toggle Navigation">
+	        ☰
+	    </button>
+	    <nav class="nav-links">
+	        <ul>
 	            <li><a href="#projects">Projects</a></li>
-	            <li><a href="../sub_pages/photography.html">Photography</a></li>
-	            <!--<li><a href="#blogs">Blogs</a></li> -->
+	            <li><a href="sub_pages/photography.html">Photography</a></li>
+
 	            <li><a href="#about-me">About Me</a></li>
 	            <li><a href="#contacts">Contacts</a></li>
 	        </ul>
@@ -29,21 +34,21 @@
 	</header>
 
     <!-- Banner Section -->
-	<section class="banner full">
-	    <div class="inner">
-	        <div class="text-content">
-	            <p>
-	                Hi, my name is Jerry Huang. <br>
-	                I am a data analyst, and <br>
-	                a coffee enthusiast.
-	            </p>
-	        </div>
+    <section id="intro">
+        <div id = "section-full" class="section-description">	
+        	<p>  
+                Hi, my name is Jerry Huang. <br>
+                I am a data analyst, and <br>
+                a coffee enthusiast.
+        	</p>
 	        <!-- Resume Button -->
 	        <div class="resume-button">
 	            <a href="resume.pdf" target="_blank" class="button">Resume</a>
 	        </div>
-	    </div>
-	</section>
+
+        </div>
+
+    </section>
 
     <!-- GIF Section -->
     <section class="cat-animation">

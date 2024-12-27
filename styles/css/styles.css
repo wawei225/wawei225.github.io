@@ -18,7 +18,7 @@ body, html {
     position: fixed;
     top: 0;
     left: 0;
-    width: calc(100% - 60px);
+    width: 100%;
     padding: 10px 30px;
     display: flex;
     align-items: center;
@@ -26,8 +26,9 @@ body, html {
     background-color: #FBF6E9;
     transition: transform 0.5s ease, opacity 0.5s ease; /* Smooth transitions */
     transform: translateY(0); /* Default position */
-    z-index: 10;
+    z-index: 20;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
 }
 
 .hidden {
@@ -38,12 +39,8 @@ body, html {
 .logo {
     display: flex;
     align-items: center;
-    gap: 10px;
-    font-size: 1.8rem; /* Match banner font size */
-    font-weight: 400;
-    color: #333;
-    text-decoration: none;
-    letter-spacing: 1px;
+    gap: 50px;
+    left: 2%;
 }
 
 .logo a {
@@ -52,6 +49,9 @@ body, html {
     color: #333;
     text-decoration: none;
     letter-spacing: 1px;
+    display: flex;
+    left: 2%;
+    gap: 20px;
 }
 
 .logo-img {
@@ -59,6 +59,16 @@ body, html {
     height: 40px;
     border-radius: 50%;
     object-fit: cover;
+}
+
+/* Menu Toggle (Hamburger Button) */
+.menu-toggle {
+    display: none; /* Hidden by default */
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    color: #333;
 }
 
 .nav-links {
@@ -69,6 +79,10 @@ body, html {
     padding: 0;
 }
 
+.nav-links li {
+    display: inline; /* Keep links inline */
+    padding: 20px;
+}
 .nav-links li a {
     text-decoration: none;
     color: #333;
@@ -82,36 +96,6 @@ body, html {
 }
 
 
-/* Banner Styling */
-.banner.full {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh; /* Full viewport height */
-    padding: 20px 0;
-    text-align: left; /* Left-align content */
-    margin-bottom: 10px;
-}
-
-.banner .inner {
-    display: flex; /* Use flexbox for text and button */
-    align-items: center; /* Align text and button vertically */
-    gap: 20px; /* Space between text and button */
-    max-width: 50rem;
-    line-height: 1.8;
-}
-
-.banner .text-content p {
-    font-size: 1.8rem; /* Large clean text size */
-    font-weight: 300; /* Light font weight */
-    color: #333;
-    letter-spacing: 1px;
-    margin: 0;
-}
-
-.banner strong {
-    font-weight: 400; /* Slightly bold for emphasis */
-}
 
 /* Resume Button Styling */
 .resume-button .button {
@@ -124,6 +108,8 @@ body, html {
     border-radius: 5px;
     transition: all 0.3s ease;
     white-space: nowrap; /* Prevent button text wrapping */
+    font-size: clamp(0.6rem, 2vw, 1rem); /* Adjust dynamically based on screen size */
+
 }
 
 .resume-button .button:hover {
@@ -167,20 +153,41 @@ h1 {
     font-weight: 400;
     text-align: center; /* Center the title horizontally */
     color: #333; /* Dark grey for readability */
-    margin-bottom: 20px; /* Space below the title */
+
+
+    font-size: clamp(1.5rem, 2vw, 2.5rem); /* Adjust dynamically based on screen size */
 }
 
 /* Section Description Box */
-.section-description {
-    font-size: 1.2rem; /* Slightly smaller than the title */
+.section-description {    
+    /*font-size: 1.8rem; /* Large clean text size */
+    font-weight: 300; /* Light font weight */
     font-family: 'Poppins', sans-serif; /* Consistent font */
-    color: #555; /* Lighter grey for differentiation */
-    line-height: 2; /* Improve readability with line spacing */
-    text-align: left; /* Align text to the left */
+
+    color: #333;
+
     max-width: 80%; /* Limit the width of the box */
     margin: 0 auto; /* Center the box horizontally */
-    padding: 20px; /* Add padding inside the box */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 0;
+    text-align: left; /* Left-align content */
+    gap: 5%;
+
+    line-height: 1.8;
+    letter-spacing: 1px;
+
+
+    font-size: clamp(0.8rem, 2vw, 1.2rem); /* Adjust dynamically based on screen size */
 }
+
+#section-full {
+    height: 100vh;
+    font-size: clamp(1rem, 2vw, 1.8rem); /* Adjust dynamically based on screen size */
+
+}
+
 
 /* Project Section Styling */
 .projects-container {
@@ -202,7 +209,6 @@ h1 {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
     padding: 20px; /* Space inside the box */
     width: calc(50% - 15px); /* Each image takes half the container width */
-    max-width: 50%;
     display: flex;
     flex-direction: column;
     gap: 15px; /* Space between elements inside the box */
@@ -490,12 +496,43 @@ footer p::before {
         margin-left: 0; /* Align title naturally on smaller screens */
     }
 
-    .project-box {
-        flex: 1 1 100%; /* Full width for smaller screens */
-    }
-
     .projects-container {
         max-width: 90%; /* Slightly wider for smaller devices */
+    }
+
+    .nav-links {
+        display: none; /* Hide navigation links by default */
+        flex-direction: column; /* Stack links vertically */
+        gap: 10px; /* Add space between links */
+        position: absolute;
+        top: 100%; /* Position below the header */
+        left: 0;
+        width: 100%; /* Full width of the viewport */
+        background-color: #FBF6E9; /* Same as header background */
+        padding: 20px 0; /* Vertical padding */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add shadow */
+    }
+
+    .nav-links.show {
+        display: flex; /* Show navigation when toggled */
+    }
+
+    .nav-links li {
+        display: block; /* Stack links vertically */
+        padding: 10px 0; /* Add vertical spacing */
+        text-align: center; /* Center align the text */
+    }
+
+    .menu-toggle {
+        display: block; /* Show the toggle button */
+    }
+
+    .project-box {
+        width: 100%; /* Full width for small screens */
+    }
+
+    .project-box img {
+        height: auto; /* Full width for small screens */
     }
 }
 
@@ -517,3 +554,4 @@ footer p::before {
         left: 100vw; /* End off-screen on the right */
     }
 }
+
