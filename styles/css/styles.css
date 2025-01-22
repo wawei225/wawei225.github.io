@@ -169,6 +169,7 @@ h1 {
     max-width: 80%; /* Limit the width of the box */
     margin: 0 auto; /* Center the box horizontally */
     display: flex;
+    flex-direction: column; /* Stack label and input vertically */
     align-items: center;
     justify-content: center;
     padding: 20px 0;
@@ -178,8 +179,49 @@ h1 {
     line-height: 1.8;
     letter-spacing: 1px;
 
-
     font-size: clamp(0.8rem, 2vw, 1.2rem); /* Adjust dynamically based on screen size */
+}
+
+/* Individual Input Group */
+.section-input {
+    width: 100%; /* Ensure inputs stretch the full width */
+    display: flex;
+    flex-direction: row; /* Stack label and input vertically */
+    justify-content: flex-start; /* Align to the left */
+    gap: 2%; /* Add space between the label and input */
+}
+
+
+/* Label Styling */
+.section-input p {
+    text-align: left; /* Left-align content */
+    /*white-space: nowrap;*/
+    font-weight: 400;
+    width: 50%;
+    flex: 1 1 auto; /* Adjust width dynamically */
+    font-size: clamp(0.6rem, 2vw, 1.2rem); /* Adjust dynamically based on screen size */
+}
+
+/* Label Styling */
+.section-input label {
+    text-align: left; /* Left-align content */
+    width: 50%;
+    font-size: clamp(0.4rem, 2vw, 1rem); /* Adjust dynamically based on screen size */
+}
+
+
+
+/* Input Field Styling */
+.section-input input[type="number"] {
+    font-size: 0.8rem;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    height: 2.5em; /* Consistent height for inputs */
+    width: 35%; /* Stretch input to fill container width */
+    background-color: #FBF6E9;
+
+    font-size: clamp(0.6rem, 2vw, 1rem); /* Adjust dynamically based on screen size */
 }
 
 #section-full {
@@ -534,7 +576,29 @@ footer p::before {
     .project-box img {
         height: auto; /* Full width for small screens */
     }
+
+    .section-input {
+        flex-direction: column; /* Stack items vertically on smaller screens */
+        align-items: flex-start; /* Align items to the left */
+    }
+
+    .section-input input[type="number"]{
+        width: 100%;
+    }
+
+    /* Label Styling */
+    .section-input p {
+        width: 100%;
+    }
+
+    .page-title {
+        font-size: 1.5rem;
+        font-size: clamp(1.5rem, 2vw, 2.5rem); /* Adjust dynamically based on screen size */
+    }
+
 }
+
+
 
 
 @media (max-width: 480px) {
