@@ -333,13 +333,14 @@ h1 {
 /* Photography Page Layout */
 .photo-gallery-container {
     padding: 50px 5%; /* Reduced horizontal padding for closer edge alignment */
-    margin-top: 40px 12%; /* Offset for fixed header */
+    margin-top: 2%; /* Offset for fixed header */
 }
 
 .page-title {
     font-size: 2.5rem;
     font-family: 'Poppins', sans-serif;
-    margin-bottom: 60px;
+    margin-top: 2.5%;
+    margin-bottom: 0;
     text-align: left; /* Align the title to the left */
     margin-left: 3%; /* Align with the first image */
     color: #333; /* Set title color to dark gray/black */
@@ -361,7 +362,8 @@ h1 {
     display: flex;
     justify-content: space-between;
     gap: 20px; /* Space between images */
-    margin-top: -50px; /* Move the images upward */
+    /*margin-top: -50px; /* Move the images upward */
+    margin-bottom: 0;
 }
 
 .gallery-item {
