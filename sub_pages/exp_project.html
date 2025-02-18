@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A/B Testing Project - Jerry Huang</title>
+    <link rel="stylesheet" href="../styles/css/styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="main-header">
+        <div class="logo">
+            <a href="../index.html" class="logo-link">
+                <img src="../styles/images/export.jpeg" alt="Logo Image" class="logo-img">
+                Jerry Huang
+            </a>
+        </div>
+        <button class="menu-toggle" aria-label="Toggle Navigation">
+            ☰
+        </button>
+        <nav class="nav-links">
+            <ul>
+                <li><a href="../index.html#projects">Projects</a></li>
+                <li><a href="../sub_pages/photography.html" class="current">Photography</a></li>
+                <li>
+                    <a href="sub_pages/ABtesting.html" class="current">A/B Testing Tool</a>
+                    <span style="color: #118B50; font-weight: bold;font-size: 0.7em; margin-left: 5px;">(Work in Process)</span>
+                </li>                <!--<li><a href="#blogs">Blogs</a></li> -->
+                <!--<li><a href="#blogs">Blogs</a></li> -->
+                <li><a href="../index.html#about-me">About Me</a></li>
+                <li><a href="../index.html#contacts">Contacts</a></li>
+            </ul>
+        </nav>
+    </header>
+
+
+    <main>
+        <section id="background">
+            <h1 class = "page-title">A/B Testing Project</h1>
+            <div class="tab-buttons">
+                <button class="tab-button active" data-tab="tab1">Background</button>
+                <button class="tab-button" data-tab="tab2">Scope of Experiment and Simulated Data</button>
+                <button class="tab-button" data-tab="tab3">Experiment Design (Metrics)</button>
+                <button class="tab-button" data-tab="tab4">Sample Size Calculation</button>
+                <button class="tab-button" data-tab="tab5">SRM</button>
+                <button class="tab-button" data-tab="tab6">A/B testing Result</button>
+                <button class="tab-button" data-tab="tab7">Conclusion</button>
+            </div>
+        
+
+            <div class="tab-content active" id="tab1-content"> 
+
+                <h1 class = "section-title">Introduction</h1>
+                <p>  
+                    This project is a simulation designed to showcase a common A/B testing process that is typically conducted in e-commerce and technology companies. A/B testing is a fundamental method used to validate design changes, optimize user experience, and improve key business metrics, such as conversion rates. <strong>The goal of this experiment is to evaluate the impact of a redesigned trending section on the homepage of our website.</strong>
+                </p>
+
+                <h1 class = "section-title">Problem Statement</h1>
+                <p>  
+                    The trending section on our homepage displays items that have received the highest number of orders on our platform. However, data analysis has shown that the conversion rate for this section is lower than the average conversion rate across the homepage. This suggests that the current design of the trending section may not be sufficiently attractive or engaging for users. The product team hypothesizes that a new UI design will enhance visibility and usability, ultimately increasing the number of users who click the items on the trending section (click-through rate).
+                    <br>
+                    Hypothesis : 
+                </p>
+
+            </div>
+
+            <div class="tab-content" id="tab2-content"> 
+
+                <h1 class = "section-title">Scope of the experiment</h1>
+                <p>To simplify the scope of this A/B test, the website will be structured into two main pages and their key sections:</p>
+                <ul>
+                    <li><strong>Homepage</strong>
+                        <ul>
+                            <li><strong>Discovery Section:</strong> General recommendations based on user preferences. This section displays multiple different items and users can click on any of them, which will direct them to the item page.</li>
+                            <li><strong>Trending Section:</strong> Items with the highest order volume on the platform, and users can click on any of them, which will direct them to the item page.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Item Page</strong>
+                        <ul>
+                            <li><strong>Description Section:</strong> Product details and specifications.</li>
+                            <li><strong>Review Section:</strong> User-generated reviews and ratings.</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <h1 class = "section-title">Simulated data</h1>
+                <p>  
+                    Self-motivated and detail-oriented data scientist with experience in <strong>optimizing user experiences via A/B testing</strong> and creating concise reports to deliver actionable findings. Proven ability to solve business problems through <strong>statistical analysis, machine learning</strong> and reporting in both <strong>e-commerce and SaaS</strong> environments. Thrives on embracing new intellectual challenges.
+                </p>
+
+            </div>
+            
+        </section>
+
+
+            <!-- Footer -->
+        <footer id="footer">
+            <p>Copyright &#169; 2025 Jerry Huang. All Rights Reserved.</p>
+        </footer>
+    </main>
+
+    <script src="../styles/java/script.js"></script>
+
+</body>
+</html>

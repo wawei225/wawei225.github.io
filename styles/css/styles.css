@@ -13,6 +13,7 @@ body, html {
 }
 
 
+
 /* Header Styling */
 .main-header {
     position: fixed;
@@ -524,6 +525,75 @@ footer p::before {
     font-size: 1.2rem;
     margin-right: 0.5rem;
 }
+
+/* Tab Section Styling */
+.tab-buttons {
+    display: flex;
+    justify-content: center;
+    border-bottom: 2px solid #ddd;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    overflow-x: auto; /* Enables horizontal scrolling */
+    white-space: nowrap; /* Prevents wrapping of buttons */
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+}
+
+.tab-button {
+
+    font-weight: 300; /* Light font weight */
+    font-family: 'Poppins', sans-serif; /* Consistent font */
+    color: #333;
+
+    padding: 10px 20px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 16px;
+    outline: none;
+    transition: color 0.3s, border-bottom 0.3s;
+    border-bottom: 3px solid transparent;
+}
+
+.tab-button:hover {
+    color: #118B50;
+}
+
+.tab-button.active {
+    color: #118B50;
+    border-bottom: 3px solid #118B50;
+}
+
+/* Tab Content */
+.tab-content {
+    display: none; /* Ensure all tabs are hidden by default */
+    padding: 20px;
+    animation: fadeIn 0.3s ease-in-out;
+
+    font-weight: 300; /* Light font weight */
+    font-family: 'Poppins', sans-serif; /* Consistent font */
+    color: #333;
+
+    max-width: 80%; /* Limit the width of the box */
+    margin: 0 auto; /* Center the box horizontally */
+
+    text-align: left; /* Keep text aligned to the left */
+    gap: 5%;
+    line-height: 1.8;
+    letter-spacing: 1px;
+
+    font-size: clamp(0.8rem, 2vw, 1.2rem); /* Adjust dynamically based on screen size */
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
 
 /* Responsive Design */
 @media (max-width: 768px) {

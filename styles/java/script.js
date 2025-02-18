@@ -102,6 +102,30 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
+document.addEventListener("DOMContentLoaded", function () {
+    const tabButtons = document.querySelectorAll(".tab-button");
+    const tabContents = document.querySelectorAll(".tab-content");
+
+    tabButtons.forEach(button => {
+        button.addEventListener("click", function () {
+            // Remove 'active' class from all buttons
+            tabButtons.forEach(btn => btn.classList.remove("active"));
+            
+            // Add 'active' class to clicked button
+            this.classList.add("active");
+            
+            // Get the target tab content ID
+            const tabId = this.getAttribute("data-tab") + "-content";
+            
+            // Hide all tab contents
+            tabContents.forEach(content => content.classList.remove("active"));
+            
+            // Show the corresponding content
+            document.getElementById(tabId).classList.add("active");
+        });
+    });
+});
+
 
 
 
