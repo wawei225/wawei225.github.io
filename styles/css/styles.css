@@ -159,6 +159,16 @@ h1 {
     font-size: clamp(1.5rem, 2vw, 2.5rem); /* Adjust dynamically based on screen size */
 }
 
+.section-title-report {
+    font-size: 2rem; /* Same size as page-title */
+    font-family: 'Poppins', sans-serif; /* Consistent font */
+    font-weight: 400;
+    text-align: left; /* Center the title horizontally */
+    color: #333; /* Dark grey for readability */
+    margin-top: 5%;
+    font-size: clamp(1.2rem, 2vw, 2rem); /* Adjust dynamically based on screen size */
+}
+
 /* Section Description Box */
 .section-description {    
     /*font-size: 1.8rem; /* Large clean text size */
@@ -519,10 +529,11 @@ footer {
 footer p {
     color: #FBF6E9;
     margin: 0;
+    font-size: clamp(0.8rem, 2vw, 1.2rem);
 }
 
 footer p::before {
-    font-size: 1.2rem;
+    font-size: clamp(0.8rem, 2vw, 1.2rem);
     margin-right: 0.5rem;
 }
 
@@ -536,6 +547,8 @@ footer p::before {
     overflow-x: auto; /* Enables horizontal scrolling */
     white-space: nowrap; /* Prevents wrapping of buttons */
     -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+    scrollbar-width: none; /* Hide scrollbar for better UI */
+    padding-left: 0; /* Ensure no left padding restricting scrolling */
 }
 
 .tab-button {
@@ -548,7 +561,7 @@ footer p::before {
     border: none;
     background: none;
     cursor: pointer;
-    font-size: 16px;
+    font-size: clamp(0.6rem, 2vw, 1.2rem);
     outline: none;
     transition: color 0.3s, border-bottom 0.3s;
     border-bottom: 3px solid transparent;
@@ -581,7 +594,7 @@ footer p::before {
     line-height: 1.8;
     letter-spacing: 1px;
 
-    font-size: clamp(0.8rem, 2vw, 1.2rem); /* Adjust dynamically based on screen size */
+    font-size: clamp(0.6rem, 2vw, 1.2rem); /* Adjust dynamically based on screen size */
 }
 
 .tab-content.active {
@@ -596,7 +609,7 @@ footer p::before {
 
 
 /* Responsive Design */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
     .photo-gallery {
         flex-direction: column; /* Stack images vertically */
         gap: 20px;
@@ -666,6 +679,14 @@ footer p::before {
     .page-title {
         font-size: 1.5rem;
         font-size: clamp(1.5rem, 2vw, 2.5rem); /* Adjust dynamically based on screen size */
+    }
+
+    .tab-buttons {
+        display: flex;
+        justify-content: flex-start;
+        padding-bottom: 3px;
+        padding-left: 0; /* Remove left padding to allow full scrolling */
+        margin-left: 0; /* Ensure no margin restricting scrolling */
     }
 
 }
