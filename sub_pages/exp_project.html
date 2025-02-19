@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>A/B Testing Project - Jerry Huang</title>
     <link rel="stylesheet" href="../styles/css/styles.css">
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
 </head>
 <body>
     <!-- Header -->
@@ -49,7 +52,10 @@
 
                 <h1 class = "section-title-report">Introduction</h1>
                 <p>  
-                    This simulation aims to demonstrate the A/B testing process. Therefore, the data is simulated, and the website is limited to two main pages for simplicity. The methodology for data simulation and the conceptual structure of the website will be explained in detail. This project simulates a typical A/B testing process, focusing on the evaluation of a redesigned trending section on an e-commerce platform’s homepage. The primary objective is to determine whether the new design improves user engagement and increases the click-through rate (CTR) within the trending section.
+                    This simulation aims to demonstrate the A/B testing process. Therefore, the data is simulated, and the website is limited to two main pages for simplicity. The methodology for data simulation and the conceptual structure of the website will be explained in detail in next sections. This project simulates a typical A/B testing process, focusing on the evaluation of a redesigned trending section on an e-commerce platform’s homepage. The primary objective is to 
+                    <strong>
+                    determine whether the new design improves user engagement and increases the click-through rate (CTR) of the trending section.
+                    </strong> 
                 </p>
 
                 <h1 class = "section-title-report">Problem Statement and Hypothesis</h1>
@@ -79,22 +85,87 @@
 
                 <h1 class = "section-title-report">Simulated data</h1>
                 <p>  
-                    Self-motivated and detail-oriented data scientist with experience in <strong>optimizing user experiences via A/B testing</strong> and creating concise reports to deliver actionable findings. Proven ability to solve business problems through <strong>statistical analysis, machine learning</strong> and reporting in both <strong>e-commerce and SaaS</strong> environments. Thrives on embracing new intellectual challenges.
-                </p>             
+                    To conduct this simulation, historical and experimental data were synthetically generated using ChatGPT. The dataset was designed to replicate real-world user interactions and engagement patterns, ensuring the validity of the simulated A/B test.
+                    <br>
+                    <br>
+                    <strong>Historical Data Generation</strong> 
+                    <br>
+                    ChatGPT was used to create a dataset that represents prior user behavior on the platform for the two pages (Home and Item). This dataset serves as a baseline for conversion rate analysis before introducing experimental changes.
+                    <br>
+                    <br>
+                    <strong>Experiment Data Generation</strong> 
+                    <br>
+                    Simulated user interactions were generated for both:
+                    <li><strong>Control Group (existing UI design)</strong>
+                    </li>
+                    <li><strong>Variant Group (redesigned UI design)</strong>
+                    </li>
+                    <br>
+                    These interactions track user engagement across devices and sections, enabling accurate measurement of the impact of the redesigned UI on conversion rates.                    
+                    <br>
+                    <br>
+                    The image below is an Entity Relationship Diagram (ERD) for the relative data and its description.
+
+                </p>  
+
+                <div align="center">
+                    <img src="../project_image/ERD_ab_testing.jpg" alt="ERD_ab_testing" width="100%" height="auto">
+                </div>
+
+                <section style = "align: center">
+                    <table border = 1px>
+                      <tr>
+                        <th>Table Name</th>
+                        <th>Description</th>
+                      </tr>
+                      <tr>
+                        <td>Experiment Table</td>
+                        <td>Assigns each user to an experimental group (Control or Variant).</td>
+                      </tr>
+                      <tr>
+                        <td>User Table</td>
+                        <td>Stores user attributes, including device type, location, and registration date.</td>
+                      </tr>
+                      <tr>
+                        <td>Event Table</td>
+                        <td>Tracks user interactions (e.g., viewing pages, clicking items) on the platform.</td>
+                      </tr>
+                    </table>
+                </section>
+
+
 
             </div>
 
             <div class="tab-content" id="tab2-content"> 
 
                 <h1 class = "section-title-report">Experiment Metrics</h1>
-                <p>  
-                    Self-motivated and detail-oriented data scientist with experience in <strong>optimizing user experiences via A/B testing</strong> and creating concise reports to deliver actionable findings. Proven ability to solve business problems through <strong>statistical analysis, machine learning</strong> and reporting in both <strong>e-commerce and SaaS</strong> environments. Thrives on embracing new intellectual challenges.
-                </p>
+
+                    <p>
+                        When determining the success metric for an A/B test, a data scientist collaborates with the product manager to align measurement with business objectives. 
+                        In our experiment, we aim to evaluate changes in the <strong>trending section’s click-through rate (CTR)</strong> to measure its impact on user engagement. 
+                        Given that repeated exposures may lead to <strong>diminishing returns</strong>, we select <strong>User-Level CTR</strong>—the proportion of users who click at least once—as the primary metric. 
+                        This ensures we capture whether the feature effectively drives initial engagement, rather than penalizing it for natural drop-offs in repeated visits.
+                    </p>
+
+                    <p><strong>The User-Level CTR is calculated as:</strong></p>
+
+                    <p style="text-align: center;">
+                        \[
+                        \text{User-Level CTR} = \frac{\text{Number of users who clicked at least once}}{\text{Total number of users exposed to the trending section}}
+                        \]
+                    </p>
+
+                    <p>
+                        To validate randomization, we check for <strong>Sample Ratio Mismatch (SRM)</strong> and establish a <strong>baseline User-Level CTR</strong> from historical data. 
+                        This metric directly ties to our hypothesis: if the new design improves engagement, we should observe a statistically significant increase in 
+                        <strong>User-Level CTR</strong> without compromising traffic distribution fairness.
+                    </p>
+
 
                 <h1 class = "section-title-report">Baseline rate and Sample Size</h1>
-                <p>  
-                    Self-motivated and detail-oriented data scientist with experience in <strong>optimizing user experiences via A/B testing</strong> and creating concise reports to deliver actionable findings. Proven ability to solve business problems through <strong>statistical analysis, machine learning</strong> and reporting in both <strong>e-commerce and SaaS</strong> environments. Thrives on embracing new intellectual challenges.
-                </p>
+                    <iframe src="../ab_testing_simulation/Baseline_rate.html" width="100%" height="600px"></iframe>
+
 
             </div>
 
@@ -175,6 +246,8 @@ This synthetic approach enables controlled experimentation while maintaining rea
         <footer id="footer">
             <p>Copyright &#169; 2025 Jerry Huang. All Rights Reserved.</p>
         </footer>
+
+
     </main>
 
     <script src="../styles/java/script.js"></script>
