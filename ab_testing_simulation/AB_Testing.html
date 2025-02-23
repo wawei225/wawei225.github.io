@@ -32,7 +32,6 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 .highlight .m { color: var(--jp-mirror-editor-number-color) } /* Literal.Number */
 .highlight .s { color: var(--jp-mirror-editor-string-color) } /* Literal.String */
 .highlight .ow { color: var(--jp-mirror-editor-operator-color); font-weight: bold } /* Operator.Word */
-.highlight .pm { color: var(--jp-mirror-editor-punctuation-color) } /* Punctuation.Marker */
 .highlight .w { color: var(--jp-mirror-editor-variable-color) } /* Text.Whitespace */
 .highlight .mb { color: var(--jp-mirror-editor-number-color) } /* Literal.Number.Bin */
 .highlight .mf { color: var(--jp-mirror-editor-number-color) } /* Literal.Number.Float */
@@ -7531,9 +7530,10 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>This page includes the process in evaluating the result of an A/B testing. It contains the following sections:</p>
 <ol>
-<li>Data Cleaning ( I will use SQL which is a commonly used tool when extracting and cleaning data)</li>
-<li>Evaluate SRM and general metrics</li>
+<li>Data Cleaning</li>
+<li>Evaluate SRM and general metrics for A/AA groups</li>
 <li>Evaluate A/B testing Result</li>
 </ol>
 </div>
@@ -7546,7 +7546,15 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h1 id="Data-Cleaning">Data Cleaning<a class="anchor-link" href="#Data-Cleaning">¶</a></h1>
+<h1 id="Data-Cleaning">Data Cleaning<a class="anchor-link" href="#Data-Cleaning">¶</a></h1><p>The primary goal of our data cleaning process is to isolate users who meet the criteria for inclusion in the experiment — the target audience (TA) users. We have defined selection criteria that ensure the users are appropriately qualified for the experiment's objectives. The criteria include:</p>
+<ol>
+<li><p><strong>Event Timing</strong>: The user's events should occur only after they have been recorded in the experiment tracking table. Additionally, the user registration date must be earlier than the event date recorded on the experiment table to ensure data consistency and reliability.</p>
+</li>
+<li><p><strong>Platform Specification</strong>: We restrict our analysis to users on iOS platforms. This focus helps control for platform-specific variables and ensures that the user experience is consistent across the study group.</p>
+</li>
+<li><p><strong>Page Interaction</strong>: It is essential that users have interacted with the "Trending" section on the home page. This interaction is crucial as it directly relates to the experiment's area of study, potentially affecting user behavior and engagement metrics.</p>
+</li>
+</ol>
 </div>
 </div>
 </div>
@@ -7567,28 +7575,12 @@ a.anchor-link {
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=87cd1dce-b156-455f-bcb8-ea80476b7cbe">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [5]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Extract TA users, for SRM check, we look at the first 3 days of data to determine if the experiment data is splitted randomlly. </span>
-<span class="c1"># In addition, we check for general metrics between A and AA group to see if there are random. The general metric should have no significant difference between these two groups.</span>
-<span class="c1"># The general metrics we evaluate will be the user-level click through rate for the discovery section on the home page. </span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=076ef749-bab2-43ea-b58e-eb41a0f86202">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [6]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [5]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">experiment_df</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
@@ -7605,40 +7597,24 @@ a.anchor-link {
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
 <pre>   user_id  group_id  event_date device
-0        1         1  2024-10-10    ios
-1        2         0  2024-10-14    ios
-2        3         1  2024-10-23    ios
-3        4         2  2024-10-27    ios
-4        5         0  2024-10-20    ios
+0        1         0  2024-10-15    ios
+1        2         2  2024-10-27    ios
+2        3         1  2024-10-25    ios
+3        4         2  2024-10-17    ios
+4        7         0  2024-10-21    ios
 </pre>
 </div>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=5e5a8ca4-0c5d-42b3-be6d-4aa694e6a1bc">
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=0619bd3b-f386-4a42-88f3-bb13a7dca7bf">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [7]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">experiment_df</span><span class="p">[</span><span class="s1">'device'</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>['ios' 'web' 'android']
-</pre>
-</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>We use SQL for data cleaning as it is commonly used tool</p>
 </div>
 </div>
 </div>
@@ -7647,10 +7623,10 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [8]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [7]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Step 2: Create SQLite in-memory database</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1">#Create SQLite in-memory database</span>
 <span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">":memory:"</span><span class="p">)</span>  <span class="c1"># Uses in-memory storage (free and fast)</span>
 <span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
 
@@ -7670,6 +7646,9 @@ a.anchor-link {
 <span class="s2">            on e.user_id = exp.user_id </span>
 <span class="s2">            and date(e.timestamp) &gt;= exp.event_date</span>
 <span class="s2">            and e.device = exp.device </span>
+<span class="s2">    left join user u</span>
+<span class="s2">        on e.user_id = u.user_id</span>
+<span class="s2">        and exp.event_date &gt;= u.registration_date</span>
 <span class="s2">    where </span>
 <span class="s2">        event_name = 'view_section'</span>
 <span class="s2">        and page_name = 'home'</span>
@@ -7708,18 +7687,18 @@ a.anchor-link {
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
 <pre>   user_id device            timestamp    event_name page_name section_name  \
-0        1    ios  2024-10-10 16:56:00     view_page      home         None   
-1        1    ios  2024-10-10 16:56:01  view_section      home    discovery   
-2        1    ios  2024-10-10 16:57:32  view_section      home     trending   
-3        2    ios  2024-10-14 15:29:00     view_page      home         None   
-4        2    ios  2024-10-14 15:29:01  view_section      home    discovery   
+0        1    ios  2024-10-15 19:37:00     view_page      home         None   
+1        1    ios  2024-10-15 19:37:01  view_section      home    discovery   
+2        1    ios  2024-10-15 19:41:07    click_item      home    discovery   
+3        1    ios  2024-10-15 19:45:31  view_section      home     trending   
+4        1    ios  2024-10-15 19:50:01    click_item      home     trending   
 
    group_id  event_date  
-0         1  2024-10-10  
-1         1  2024-10-10  
-2         1  2024-10-10  
-3         0  2024-10-14  
-4         0  2024-10-14  
+0         0  2024-10-15  
+1         0  2024-10-15  
+2         0  2024-10-15  
+3         0  2024-10-15  
+4         0  2024-10-15  
 </pre>
 </div>
 </div>
@@ -7743,41 +7722,7 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="SRM">SRM<a class="anchor-link" href="#SRM">¶</a></h2>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=22a031ae-7094-4145-9401-03cf5d201266">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [72]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span> 
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>
-<span class="ansi-red-intense-fg ansi-bold">---------------------------------------------------------------------------</span>
-<span class="ansi-red-intense-fg ansi-bold">ImportError</span>                               Traceback (most recent call last)
-Cell <span class="ansi-green-intense-fg ansi-bold">In[72], line 5</span>
-<span class="ansi-green-fg">      2</span> sys<span style="color: rgb(98,98,98)">.</span>path<span style="color: rgb(98,98,98)">.</span>append(<span style="color: rgb(175,0,0)">r</span><span style="color: rgb(175,0,0)">'</span><span style="color: rgb(175,0,0)">C:</span><span style="color: rgb(175,0,0)">\</span><span style="color: rgb(175,0,0)">Users</span><span style="color: rgb(175,0,0)">\</span><span style="color: rgb(175,0,0)">hwhua</span><span style="color: rgb(175,0,0)">\</span><span style="color: rgb(175,0,0)">Desktop</span><span style="color: rgb(175,0,0)">\</span><span style="color: rgb(175,0,0)">github_local</span><span style="color: rgb(175,0,0)">\</span><span style="color: rgb(175,0,0)">wawei225.github.io</span><span style="color: rgb(175,0,0)">\</span><span style="color: rgb(175,0,0)">ab_testing_simulation</span><span style="color: rgb(175,0,0)">'</span>)
-<span class="ansi-green-fg">      4</span> <span class="ansi-bold" style="color: rgb(0,135,0)">from</span> <span class="ansi-bold" style="color: rgb(0,0,255)">test_funcs</span> <span class="ansi-bold" style="color: rgb(0,135,0)">import</span> check_srm
-<span class="ansi-green-intense-fg ansi-bold">----&gt; 5</span> <span class="ansi-bold" style="color: rgb(0,135,0)">from</span> <span class="ansi-bold" style="color: rgb(0,0,255)">test_funcs</span> <span class="ansi-bold" style="color: rgb(0,135,0)">import</span> z_test
-
-<span class="ansi-red-intense-fg ansi-bold">ImportError</span>: cannot import name 'z_test' from 'test_funcs' (C:\Users\hwhua\Desktop\github_local\wawei225.github.io\ab_testing_simulation\test_funcs.py)</pre>
-</div>
+<h2 id="SRM">SRM<a class="anchor-link" href="#SRM">¶</a></h2><p>Checking SRM after 3 days running an experiment</p>
 </div>
 </div>
 </div>
@@ -7786,15 +7731,14 @@ Cell <span class="ansi-green-intense-fg ansi-bold">In[72], line 5</span>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [19]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [10]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">test_funcs</span> <span class="kn">import</span> <span class="n">check_srm</span>
-<span class="c1"># Example Usage:</span>
 <span class="n">result</span> <span class="o">=</span> <span class="n">check_srm</span><span class="p">(</span><span class="n">n_AA</span><span class="o">=</span><span class="n">TA_df</span><span class="p">[(</span><span class="n">TA_df</span><span class="p">[</span><span class="s1">'event_date'</span><span class="p">]</span><span class="o">&lt;=</span><span class="s1">'2024-10-07'</span><span class="p">)</span><span class="o">&amp;</span> <span class="p">(</span><span class="n">TA_df</span><span class="p">[</span><span class="s1">'group_id'</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">)][</span><span class="s1">'user_id'</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">(),</span> 
                    <span class="n">n_A</span><span class="o">=</span><span class="n">TA_df</span><span class="p">[(</span><span class="n">TA_df</span><span class="p">[</span><span class="s1">'event_date'</span><span class="p">]</span><span class="o">&lt;=</span><span class="s1">'2024-10-07'</span><span class="p">)</span><span class="o">&amp;</span> <span class="p">(</span><span class="n">TA_df</span><span class="p">[</span><span class="s1">'group_id'</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">)][</span><span class="s1">'user_id'</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">(),</span> 
                    <span class="n">n_B</span><span class="o">=</span><span class="n">TA_df</span><span class="p">[(</span><span class="n">TA_df</span><span class="p">[</span><span class="s1">'event_date'</span><span class="p">]</span><span class="o">&lt;=</span><span class="s1">'2024-10-07'</span><span class="p">)</span><span class="o">&amp;</span> <span class="p">(</span><span class="n">TA_df</span><span class="p">[</span><span class="s1">'group_id'</span><span class="p">]</span><span class="o">==</span><span class="mi">2</span><span class="p">)][</span><span class="s1">'user_id'</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">(),</span> 
-                   <span class="n">ratio_AA</span><span class="o">=</span><span class="mf">0.333333</span><span class="p">,</span> <span class="n">ratio_A</span><span class="o">=</span><span class="mf">0.333333</span><span class="p">,</span> <span class="n">ratio_B</span><span class="o">=</span><span class="mf">0.333334</span><span class="p">)</span>  <span class="c1"># Replace with real numbers</span>
+                   <span class="n">ratio_AA</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">ratio_A</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">ratio_B</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>  <span class="c1"># Replace with real numbers</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -7808,7 +7752,7 @@ Cell <span class="ansi-green-intense-fg ansi-bold">In[72], line 5</span>
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>{'Observed Counts': {'AA': 3655, 'A': 3538, 'B': 3507}, 'Expected Counts': {'AA': 3566.6630999999998, 'A': 3566.6630999999998, 'B': 3566.6738}, 'Chi-Square Statistic': 3.416620125067091, 'p-value': 0.18117170290829315, 'SRM Detected': False}
+<pre>{'Observed Counts': {'AA': 3008, 'A': 2947, 'B': 6197}, 'Expected Counts': {'AA': 3038.0, 'A': 3038.0, 'B': 6076.0}, 'Chi-Square Statistic': 5.431698485845951, 'p-value': 0.06614875278646357, 'SRM Detected': False}
 </pre>
 </div>
 </div>
@@ -7830,7 +7774,7 @@ Cell <span class="ansi-green-intense-fg ansi-bold">In[72], line 5</span>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [23]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [12]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Step 2: Create SQLite in-memory database</span>
@@ -7876,36 +7820,9 @@ Cell <span class="ansi-green-intense-fg ansi-bold">In[72], line 5</span>
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
 <pre>   group_id  num_user_click  num_user_exposed
-0         0               0             29966
-1         1               0             29952
-2         2               0             29911
-</pre>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=09923f18-0870-4538-a28b-42ffa9b3e35a">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [73]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">event_df</span><span class="p">[</span><span class="n">event_df</span><span class="p">[</span><span class="s1">'event_name'</span><span class="p">]</span><span class="o">==</span><span class="s1">'click_item'</span><span class="p">][</span><span class="s1">'section_name'</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>['trending']
+0         0            7568             24710
+1         1            7510             24622
+2         2           15184             50668
 </pre>
 </div>
 </div>
@@ -7916,18 +7833,15 @@ Cell <span class="ansi-green-intense-fg ansi-bold">In[72], line 5</span>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [25]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [13]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">test_funcs</span> <span class="kn">import</span> <span class="n">z_test_proportions</span>
-<span class="c1"># Example Usage:</span>
-<span class="n">x_A</span><span class="p">,</span> <span class="n">n_A</span> <span class="o">=</span> <span class="mi">63</span><span class="p">,</span> <span class="mi">150</span>  <span class="c1"># Control group (300 clicks, 5000 users)</span>
-<span class="n">x_B</span><span class="p">,</span> <span class="n">n_B</span> <span class="o">=</span> <span class="mi">37</span><span class="p">,</span> <span class="mi">50</span>  <span class="c1"># Test group (350 clicks, 5000 users)</span>
 
-<span class="n">result</span> <span class="o">=</span> <span class="n">z_test_proportions</span><span class="p">(</span><span class="n">general_metric</span><span class="p">[</span><span class="n">general_metric</span><span class="p">[</span><span class="s1">'group_id'</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">][</span><span class="s1">'num_user_click'</span><span class="p">],</span>
-                            <span class="n">general_metric</span><span class="p">[</span><span class="n">general_metric</span><span class="p">[</span><span class="s1">'group_id'</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">][</span><span class="s1">'num_user_exposed'</span><span class="p">],</span> 
-                            <span class="n">general_metric</span><span class="p">[</span><span class="n">general_metric</span><span class="p">[</span><span class="s1">'group_id'</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">][</span><span class="s1">'num_user_click'</span><span class="p">],</span> 
-                            <span class="n">general_metric</span><span class="p">[</span><span class="n">general_metric</span><span class="p">[</span><span class="s1">'group_id'</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">][</span><span class="s1">'num_user_exposed'</span><span class="p">])</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">z_test_proportions</span><span class="p">(</span><span class="n">general_metric</span><span class="p">[</span><span class="n">general_metric</span><span class="p">[</span><span class="s1">'group_id'</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">][</span><span class="s1">'num_user_click'</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span>
+                            <span class="n">general_metric</span><span class="p">[</span><span class="n">general_metric</span><span class="p">[</span><span class="s1">'group_id'</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">][</span><span class="s1">'num_user_exposed'</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span> 
+                            <span class="n">general_metric</span><span class="p">[</span><span class="n">general_metric</span><span class="p">[</span><span class="s1">'group_id'</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">][</span><span class="s1">'num_user_click'</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span> 
+                            <span class="n">general_metric</span><span class="p">[</span><span class="n">general_metric</span><span class="p">[</span><span class="s1">'group_id'</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">][</span><span class="s1">'num_user_exposed'</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -7941,367 +7855,29 @@ Cell <span class="ansi-green-intense-fg ansi-bold">In[72], line 5</span>
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>{'CTR_A': 0    0.0
-dtype: float64, 'CTR_B': 1    0.0
-dtype: float64, 'CTR_Difference': 0   NaN
-1   NaN
-dtype: float64, 'Z-score': 0   NaN
-1   NaN
-dtype: float64, 'p-value': array([nan, nan]), '95% CI': (0   NaN
-1   NaN
-dtype: float64, 0   NaN
-1   NaN
-dtype: float64), 'Significant?': array([False, False])}
+<pre>{'CTR_A': 0.3062727640631323, 'CTR_B': 0.30501177808463975, 'CTR_Difference': -0.001260985978492557, 'Z-score': -0.3039800897510471, 'p-value': 0.7611430599205433, '95% CI': (-0.00939141026016016, 0.006869438303175046), 'is_significant': False}
 </pre>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=fee0f10a-709c-4475-8973-d07bdc3c3b34">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=7e8c9694-e5e6-4793-b331-19c7511be3f3">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>Including a part for calculating the MDE, conversion rate, and sample size from historical data.</p>
+<h1 id="A/B-Testing-Result">A/B Testing Result<a class="anchor-link" href="#A/B-Testing-Result">¶</a></h1>
 </div>
 </div>
 </div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=baa9300a-8f02-4edb-9b80-eb8b2fbd2eb4">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>Evaluating historical data for baseline conversation rate.</p>
-<ul>
-<li>Time Series trend</li>
-<li>Average Conversation rate</li>
-</ul>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=f02b8522-0adc-434c-b1d4-038e6864ac7d">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=2feb20d3-8cb5-4d86-aa95-1847df11e088">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [27]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">z_test_proportions</span><span class="p">(</span><span class="n">x_A</span><span class="p">,</span><span class="n">n_A</span><span class="p">,</span><span class="n">x_B</span><span class="p">,</span><span class="n">n_B</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>{'CTR_A': 0.42, 'CTR_B': 0.74, 'CTR_Difference': 0.32, 'Z-score': 3.919183588453085, 'p-value': 8.884941911446731e-05, '95% CI': (0.15996961078815633, 0.4800303892118437), 'Significant?': True}
-</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=0522b995-d961-47aa-a25e-8c79133eddb2">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h1 id="Break">Break<a class="anchor-link" href="#Break">¶</a></h1>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=ccd9cf7b-60d9-49da-b266-0445bce6e85f">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [50]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">ta_df</span> <span class="o">=</span> <span class="n">event_hist_df</span><span class="p">[</span>
-    <span class="p">(</span><span class="n">event_hist_df</span><span class="p">[</span><span class="s1">'device'</span><span class="p">]</span> <span class="o">==</span> <span class="s1">'ios'</span><span class="p">)</span> <span class="o">&amp;</span> 
-    <span class="p">(</span><span class="n">event_hist_df</span><span class="p">[</span><span class="s1">'event_name'</span><span class="p">]</span> <span class="o">==</span> <span class="s1">'view_section'</span><span class="p">)</span> <span class="o">&amp;</span> 
-    <span class="p">(</span><span class="n">event_hist_df</span><span class="p">[</span><span class="s1">'section_name'</span><span class="p">]</span> <span class="o">==</span> <span class="s1">'trending'</span><span class="p">)</span>
-<span class="p">]</span>
-
-<span class="n">convert_df</span> <span class="o">=</span> <span class="n">event_hist_df</span><span class="p">[</span>
-    <span class="p">(</span><span class="n">event_hist_df</span><span class="p">[</span><span class="s1">'device'</span><span class="p">]</span> <span class="o">==</span> <span class="s1">'ios'</span><span class="p">)</span> <span class="o">&amp;</span> 
-    <span class="p">(</span><span class="n">event_hist_df</span><span class="p">[</span><span class="s1">'event_name'</span><span class="p">]</span> <span class="o">==</span> <span class="s1">'click_item'</span><span class="p">)</span> <span class="o">&amp;</span> 
-    <span class="p">(</span><span class="n">event_hist_df</span><span class="p">[</span><span class="s1">'section_name'</span><span class="p">]</span> <span class="o">==</span> <span class="s1">'trending'</span><span class="p">)</span>
-<span class="p">]</span>
-
-<span class="n">conversion_rate</span> <span class="o">=</span> <span class="n">convert_df</span><span class="p">[</span><span class="s1">'user_id'</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">()</span><span class="o">/</span><span class="n">ta_df</span><span class="p">[</span><span class="s1">'user_id'</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=183c93bd-7e06-4b58-9bd3-1d16da30c527">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [56]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">event_hist_df</span><span class="p">[</span><span class="s1">'timestamp'</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">())</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">event_hist_df</span><span class="p">[</span><span class="s1">'timestamp'</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>2024-09-01 00:00:00
-2024-10-01 00:03:18
-</pre>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=0e40c98d-2843-4e20-979e-8440eab802a2">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [38]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span> 
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=bef32f37-4605-422f-aa30-772458c9609c">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [52]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">conversion_rate</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>0.2595009981859452
-</pre>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=996f56cc-d787-4e73-986f-196b908df53e">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span> 
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=7eb2e293-9a66-4d94-b9f0-5f5ebc7d5e3b">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span> 
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=ad8ea524-1589-459d-a365-70d598ac2b1d">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [38]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Step 1: Load CSV files into Pandas</span>
-<span class="n">experiment_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'data/experiment_table.csv'</span><span class="p">)</span>
-<span class="n">user_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'data/user_table.csv'</span><span class="p">)</span>
-<span class="n">event_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'data/event_table.csv'</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[38]:</div>
-<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
-<pre>175237</pre>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=cdd7d551-13bb-4e98-b127-29ed7034fa25">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [26]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">user_df</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>   user_id   device registration_date geo      lang
-0        1  android        2024-01-08  JP  Japanese
-1        2  android        2024-01-09  JP  Japanese
-2        3      web        2024-01-05  JP  Japanese
-3        4      web        2024-01-14  US  Japanese
-4        5      ios        2024-01-07  JP  Japanese
-</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=87e07844-1c1e-44f5-a1ce-e1ff2aaa5212">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>Success Metrics</p>
-<ul>
-<li>percentage of users who click the item in trending section on the home page among all the users who saw the trending section : click through rate over the experiment period -&gt; considering diminishing return</li>
-</ul>
-<p>Data Cleaning</p>
-<ul>
-<li>experiment table should only contains  user_id where the device = ios</li>
-<li>there should not be duplicate user_id in experiment table (no user is assigned to two different groups)</li>
-<li>the event table for each user should happen "after" the event_date in the experiment table ( the event should only be accountable after they are assigned into an experiment group )</li>
-<li>only users who have the event view_section = trending should be considered ( the users who actually see the UI changes )</li>
-<li>registration date should be earlier than experiment and event date</li>
-</ul>
-<p>group_id | num_user_click | num_user_exposed</p>
-<ol>
-<li>merge experiment group</li>
-<li>remove non-ios user</li>
-<li>remove user who never exposed to the trending section</li>
-</ol>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=0a7ee0f2-0279-45ba-a3e9-a059217e08d9">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [32]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">event_df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">20</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>    user_id   device            timestamp    event_name page_name section_name
-0         1  android  2024-01-08 14:18:00     view_page      home          NaN
-1         1  android  2024-01-08 14:18:01  view_section      home    discovery
-2         1  android  2024-01-08 14:22:43  view_section      home     trending
-3         1  android  2024-01-08 14:24:16    click_item      home     trending
-4         1  android  2024-01-08 14:24:52     view_page      home          NaN
-5         1  android  2024-01-08 14:24:53  view_section      home    discovery
-6         1  android  2024-01-08 14:28:43    click_item      home    discovery
-7         1  android  2024-01-08 14:29:16  view_section      home     trending
-8         1  android  2024-01-08 14:30:28     view_page      home          NaN
-9         1  android  2024-01-08 14:30:29  view_section      home    discovery
-10        1  android  2024-01-08 14:33:11    click_item      home    discovery
-11        1  android  2024-01-08 14:34:11  view_section      home     trending
-12        1  android  2024-01-08 14:36:39     view_page      home          NaN
-13        1  android  2024-01-08 14:36:40  view_section      home    discovery
-14        1  android  2024-01-08 14:37:50    click_item      home    discovery
-15        1  android  2024-01-08 14:42:02  view_section      home     trending
-16        1  android  2024-01-08 14:43:22     view_page      item          NaN
-17        1  android  2024-01-08 14:43:23  view_section      item  description
-18        1  android  2024-01-08 14:45:23  view_section      item       review
-19        1  android  2024-01-08 14:46:01     view_page      item          NaN
-</pre>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=2ea5b30c-f053-43c4-8148-ad079c3d5584">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span> 
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=6f7583e2-ec98-452a-8368-b94a03581310">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [60]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [15]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Step 2: Create SQLite in-memory database</span>
@@ -8309,33 +7885,28 @@ dtype: float64), 'Significant?': array([False, False])}
 <span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
 
 <span class="c1"># Step 3: Store DataFrames as SQL tables</span>
-<span class="n">experiment_df</span><span class="o">.</span><span class="n">to_sql</span><span class="p">(</span><span class="s2">"experiment"</span><span class="p">,</span> <span class="n">conn</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">if_exists</span><span class="o">=</span><span class="s2">"replace"</span><span class="p">)</span>
-<span class="n">user_df</span><span class="o">.</span><span class="n">to_sql</span><span class="p">(</span><span class="s2">"user"</span><span class="p">,</span> <span class="n">conn</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">if_exists</span><span class="o">=</span><span class="s2">"replace"</span><span class="p">)</span>
-<span class="n">event_df</span><span class="o">.</span><span class="n">to_sql</span><span class="p">(</span><span class="s2">"event"</span><span class="p">,</span> <span class="n">conn</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">if_exists</span><span class="o">=</span><span class="s2">"replace"</span><span class="p">)</span>
+<span class="n">TA_df</span><span class="o">.</span><span class="n">to_sql</span><span class="p">(</span><span class="s2">"ta_df"</span><span class="p">,</span> <span class="n">conn</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">if_exists</span><span class="o">=</span><span class="s2">"replace"</span><span class="p">)</span>
 
 <span class="c1"># Step 4: Run SQL queries for data cleaning (example: removing duplicates)</span>
-<span class="n">check_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql_query</span><span class="p">(</span><span class="s2">"""</span>
+<span class="n">success_metric</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql_query</span><span class="p">(</span><span class="s2">"""</span>
+
 <span class="s2">    select </span>
-<span class="s2">        group_id,</span>
+<span class="s2">        case when group_id ==0 then 1 else group_id end as group_id,</span>
 <span class="s2">        count(distinct </span>
 <span class="s2">            case when event_name = 'click_item' and page_name ='home' and section_name ='trending'</span>
-<span class="s2">                then e.user_id</span>
+<span class="s2">                then user_id</span>
 <span class="s2">            else null end) as num_user_click,</span>
 <span class="s2">        count(distinct </span>
 <span class="s2">            case when event_name = 'view_section' and page_name ='home' and section_name ='trending'</span>
-<span class="s2">                then e.user_id</span>
+<span class="s2">                then user_id</span>
 <span class="s2">            else null end) as num_user_exposed</span>
-<span class="s2">    from event e </span>
-<span class="s2">    left join experiment exp </span>
-<span class="s2">        on e.user_id = exp.user_id </span>
-<span class="s2">        and date(e.timestamp) &gt;= exp.event_date</span>
-<span class="s2">        and e.device = exp.device </span>
-<span class="s2">    where group_id is not null </span>
+<span class="s2">    from ta_df </span>
 <span class="s2">    group by 1</span>
+
 <span class="s2">"""</span><span class="p">,</span> <span class="n">conn</span><span class="p">)</span>
 
 <span class="c1"># Step 5: Retrieve and process cleaned data</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">check_df</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">success_metric</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
 
 <span class="c1"># Close connection when done</span>
 <span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
@@ -8352,23 +7923,26 @@ dtype: float64), 'Significant?': array([False, False])}
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
 <pre>   group_id  num_user_click  num_user_exposed
-0         0              24                24
-1         1              39                39
-2         2              37                37
+0         1           14694             49332
+1         2           20376             50668
 </pre>
 </div>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=5cf7d3d1-61fc-4461-a318-ccf7aeeeb580">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=d19a943f-e11a-4875-89b7-f98b674af544">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [54]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [16]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">check_df</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">z_test_proportions</span><span class="p">(</span><span class="n">success_metric</span><span class="p">[</span><span class="n">success_metric</span><span class="p">[</span><span class="s1">'group_id'</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">][</span><span class="s1">'num_user_click'</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span>
+                            <span class="n">success_metric</span><span class="p">[</span><span class="n">success_metric</span><span class="p">[</span><span class="s1">'group_id'</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">][</span><span class="s1">'num_user_exposed'</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span> 
+                            <span class="n">success_metric</span><span class="p">[</span><span class="n">success_metric</span><span class="p">[</span><span class="s1">'group_id'</span><span class="p">]</span><span class="o">==</span><span class="mi">2</span><span class="p">][</span><span class="s1">'num_user_click'</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span> 
+                            <span class="n">success_metric</span><span class="p">[</span><span class="n">success_metric</span><span class="p">[</span><span class="s1">'group_id'</span><span class="p">]</span><span class="o">==</span><span class="mi">2</span><span class="p">][</span><span class="s1">'num_user_exposed'</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -8381,275 +7955,20 @@ dtype: float64), 'Significant?': array([False, False])}
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>Empty DataFrame
-Columns: [user_id, device, timestamp, event_name, page_name, section_name, user_id, group_id, event_date, device]
-Index: []
-</pre>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=ae65916f-beed-47cc-aa86-a49be477e9b6">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [5]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'C:/Users/hwhuaDesktop\AB_Testing_Mock\data\event_table.csv'</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>
-<span class="ansi-cyan-intense-fg ansi-bold">  Cell </span><span class="ansi-green-intense-fg ansi-bold">In[5], line 1</span>
-<span class="ansi-yellow-intense-fg ansi-bold">    df = pd.read_csv('C:\Users\hwhua\Desktop\AB_Testing_Mock\data\event_table.csv')</span>
-<span class="ansi-white-intense-fg ansi-bold">                     ^</span>
-<span class="ansi-red-intense-fg ansi-bold">SyntaxError</span><span class="ansi-red-intense-fg ansi-bold">:</span> (unicode error) 'unicodeescape' codec can't decode bytes in position 2-3: truncated \UXXXXXXXX escape
+<pre>{'CTR_A': 0.29785940160544877, 'CTR_B': 0.4021473119128444, 'CTR_Difference': 0.10428791030739565, 'Z-score': 34.55211394502931, 'p-value': 0.0, '95% CI': (0.09837219271770982, 0.11020362789708148), 'is_significant': True}
 </pre>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=6d559b36-1733-43f1-9970-46bb53aab51c">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=5efbc9d1-7f37-47a9-b22e-8a4c6e093c97">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h1 id="check-for-SRM">check for SRM<a class="anchor-link" href="#check-for-SRM">¶</a></h1><p>experiment ratio
-actual ratio</p>
-<p>Chi-Square Test</p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=d47fabc4-12e1-4cd4-bd46-f06b62cdd590">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [74]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">stats</span>
-
-<span class="k">def</span> <span class="nf">check_srm</span><span class="p">(</span><span class="n">n_AA</span><span class="p">,</span> <span class="n">n_A</span><span class="p">,</span> <span class="n">n_B</span><span class="p">,</span> <span class="n">ratio_AA</span><span class="p">,</span> <span class="n">ratio_A</span><span class="p">,</span> <span class="n">ratio_B</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">"""</span>
-<span class="sd">    Check for Sample Ratio Mismatch (SRM) using a chi-square test.</span>
-
-<span class="sd">    Parameters:</span>
-<span class="sd">    - n_AA: Observed user count in AA group</span>
-<span class="sd">    - n_A: Observed user count in A group</span>
-<span class="sd">    - n_B: Observed user count in B group</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">    - Dictionary containing chi-square statistic, p-value, expected counts, and SRM status</span>
-<span class="sd">    """</span>
-    <span class="c1"># Total users</span>
-    <span class="n">N</span> <span class="o">=</span> <span class="n">n_AA</span> <span class="o">+</span> <span class="n">n_A</span> <span class="o">+</span> <span class="n">n_B</span>
-
-    <span class="c1"># Expected count assuming equal distribution</span>
-    <span class="n">expected</span> <span class="o">=</span> <span class="p">[</span><span class="n">N</span> <span class="o">*</span> <span class="n">ratio_AA</span><span class="p">,</span> <span class="n">N</span> <span class="o">*</span> <span class="n">ratio_A</span><span class="p">,</span> <span class="n">N</span> <span class="o">*</span> <span class="n">ratio_B</span><span class="p">]</span>
-    <span class="n">observed</span> <span class="o">=</span> <span class="p">[</span><span class="n">n_AA</span><span class="p">,</span> <span class="n">n_A</span><span class="p">,</span> <span class="n">n_B</span><span class="p">]</span>
-
-    <span class="c1"># Perform chi-square test</span>
-    <span class="n">chi2_stat</span><span class="p">,</span> <span class="n">p_value</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">chisquare</span><span class="p">(</span><span class="n">f_obs</span><span class="o">=</span><span class="n">observed</span><span class="p">,</span> <span class="n">f_exp</span><span class="o">=</span><span class="n">expected</span><span class="p">)</span>
-
-    <span class="c1"># Determine if there is a significant SRM</span>
-    <span class="n">srm_detected</span> <span class="o">=</span> <span class="n">p_value</span> <span class="o">&lt;</span> <span class="mf">0.05</span>
-
-    <span class="k">return</span> <span class="p">{</span>
-        <span class="s1">'Observed Counts'</span><span class="p">:</span> <span class="p">{</span><span class="s1">'AA'</span><span class="p">:</span> <span class="n">n_AA</span><span class="p">,</span> <span class="s1">'A'</span><span class="p">:</span> <span class="n">n_A</span><span class="p">,</span> <span class="s1">'B'</span><span class="p">:</span> <span class="n">n_B</span><span class="p">},</span>
-        <span class="s1">'Expected Counts'</span><span class="p">:</span> <span class="p">{</span><span class="s1">'AA'</span><span class="p">:</span> <span class="n">expected</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">'A'</span><span class="p">:</span> <span class="n">expected</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s1">'B'</span><span class="p">:</span> <span class="n">expected</span><span class="p">[</span><span class="mi">2</span><span class="p">]},</span>
-        <span class="s1">'Chi-Square Statistic'</span><span class="p">:</span> <span class="n">chi2_stat</span><span class="p">,</span>
-        <span class="s1">'p-value'</span><span class="p">:</span> <span class="n">p_value</span><span class="p">,</span>
-        <span class="s1">'SRM Detected'</span><span class="p">:</span> <span class="n">srm_detected</span>
-    <span class="p">}</span>
-
-<span class="c1"># Example Usage:</span>
-<span class="n">result</span> <span class="o">=</span> <span class="n">check_srm</span><span class="p">(</span><span class="n">n_AA</span><span class="o">=</span><span class="mi">3400</span><span class="p">,</span> <span class="n">n_A</span><span class="o">=</span><span class="mi">3300</span><span class="p">,</span> <span class="n">n_B</span><span class="o">=</span><span class="mi">3300</span><span class="p">,</span> <span class="n">ratio_AA</span><span class="o">=</span><span class="mf">0.333333</span><span class="p">,</span> <span class="n">ratio_A</span><span class="o">=</span><span class="mf">0.333333</span><span class="p">,</span> <span class="n">ratio_B</span><span class="o">=</span><span class="mf">0.333334</span><span class="p">)</span>  <span class="c1"># Replace with real numbers</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>{'Observed Counts': {'AA': 3400, 'A': 3300, 'B': 3300}, 'Expected Counts': {'AA': 3333.33, 'A': 3333.33, 'B': 3333.34}, 'Chi-Square Statistic': 2.0002010198029847, 'p-value': 0.3678424675031903, 'SRM Detected': False}
-</pre>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=ed7fceb2-c936-411f-b9bb-e13ba53d74fc">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [78]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">stats</span>
-
-<span class="k">def</span> <span class="nf">z_test_proportions</span><span class="p">(</span><span class="n">x_A</span><span class="p">,</span> <span class="n">n_A</span><span class="p">,</span> <span class="n">x_B</span><span class="p">,</span> <span class="n">n_B</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.05</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">"""</span>
-<span class="sd">    Perform a two-proportion z-test for comparing conversion rates (CTR) between two groups.</span>
-<span class="sd">    </span>
-<span class="sd">    Parameters:</span>
-<span class="sd">    - x_A: Number of converted users in Control</span>
-<span class="sd">    - n_A: Total users in Control</span>
-<span class="sd">    - x_B: Number of converted users in Test</span>
-<span class="sd">    - n_B: Total users in Test</span>
-<span class="sd">    - alpha: Significance level (default = 0.05)</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">    - Dictionary containing Z-score, p-value, confidence interval, and test result</span>
-<span class="sd">    """</span>
-    <span class="c1"># Compute proportions</span>
-    <span class="n">p_A</span> <span class="o">=</span> <span class="n">x_A</span> <span class="o">/</span> <span class="n">n_A</span>
-    <span class="n">p_B</span> <span class="o">=</span> <span class="n">x_B</span> <span class="o">/</span> <span class="n">n_B</span>
-
-    <span class="c1"># Compute pooled proportion</span>
-    <span class="n">p_pool</span> <span class="o">=</span> <span class="p">(</span><span class="n">x_A</span> <span class="o">+</span> <span class="n">x_B</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">n_A</span> <span class="o">+</span> <span class="n">n_B</span><span class="p">)</span>
-
-    <span class="c1"># Compute standard error</span>
-    <span class="n">SE</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">p_pool</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">p_pool</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">n_A</span> <span class="o">+</span> <span class="mi">1</span><span class="o">/</span><span class="n">n_B</span><span class="p">))</span>
-
-    <span class="c1"># Compute z-score</span>
-    <span class="n">Z</span> <span class="o">=</span> <span class="p">(</span><span class="n">p_B</span> <span class="o">-</span> <span class="n">p_A</span><span class="p">)</span> <span class="o">/</span> <span class="n">SE</span>
-
-    <span class="c1"># Compute two-tailed p-value</span>
-    <span class="n">p_value</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">Z</span><span class="p">)))</span>
-
-    <span class="c1"># Confidence interval (95%)</span>
-    <span class="n">z_critical</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">alpha</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># 1.96 for 95% CI</span>
-    <span class="n">margin_of_error</span> <span class="o">=</span> <span class="n">z_critical</span> <span class="o">*</span> <span class="n">SE</span>
-    <span class="n">confidence_interval</span> <span class="o">=</span> <span class="p">((</span><span class="n">p_B</span> <span class="o">-</span> <span class="n">p_A</span><span class="p">)</span> <span class="o">-</span> <span class="n">margin_of_error</span><span class="p">,</span> <span class="p">(</span><span class="n">p_B</span> <span class="o">-</span> <span class="n">p_A</span><span class="p">)</span> <span class="o">+</span> <span class="n">margin_of_error</span><span class="p">)</span>
-
-    <span class="c1"># Determine significance</span>
-    <span class="n">is_significant</span> <span class="o">=</span> <span class="n">p_value</span> <span class="o">&lt;</span> <span class="n">alpha</span>
-
-    <span class="k">return</span> <span class="p">{</span>
-        <span class="s1">'CTR_A'</span><span class="p">:</span> <span class="n">p_A</span><span class="p">,</span>
-        <span class="s1">'CTR_B'</span><span class="p">:</span> <span class="n">p_B</span><span class="p">,</span>
-        <span class="s1">'CTR_Difference'</span><span class="p">:</span> <span class="n">p_B</span> <span class="o">-</span> <span class="n">p_A</span><span class="p">,</span>
-        <span class="s1">'Z-score'</span><span class="p">:</span> <span class="n">Z</span><span class="p">,</span>
-        <span class="s1">'p-value'</span><span class="p">:</span> <span class="n">p_value</span><span class="p">,</span>
-        <span class="s1">'95% CI'</span><span class="p">:</span> <span class="n">confidence_interval</span><span class="p">,</span>
-        <span class="s1">'Significant?'</span><span class="p">:</span> <span class="n">is_significant</span>
-    <span class="p">}</span>
-
-<span class="c1"># Example Usage:</span>
-<span class="n">x_A</span><span class="p">,</span> <span class="n">n_A</span> <span class="o">=</span> <span class="mi">63</span><span class="p">,</span> <span class="mi">150</span>  <span class="c1"># Control group (300 clicks, 5000 users)</span>
-<span class="n">x_B</span><span class="p">,</span> <span class="n">n_B</span> <span class="o">=</span> <span class="mi">37</span><span class="p">,</span> <span class="mi">50</span>  <span class="c1"># Test group (350 clicks, 5000 users)</span>
-
-<span class="n">result</span> <span class="o">=</span> <span class="n">z_test_proportions</span><span class="p">(</span><span class="n">x_A</span><span class="p">,</span> <span class="n">n_A</span><span class="p">,</span> <span class="n">x_B</span><span class="p">,</span> <span class="n">n_B</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>{'CTR_A': 0.42, 'CTR_B': 0.74, 'CTR_Difference': 0.32, 'Z-score': 3.919183588453085, 'p-value': 8.884941911446731e-05, '95% CI': (0.15996961078815633, 0.4800303892118437), 'Significant?': True}
-</pre>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=9cb5c0d2-6212-4900-a58f-ff89e8a244ce">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [82]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="mi">37</span><span class="o">/</span><span class="mi">50</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>0.74
-</pre>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=22c2cf04-6271-4924-8ff2-4cbacc0d26d7">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span> 
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=455c05f5-2ac2-4c5e-93c8-aa54b8a00182">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span> 
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=dbf8217a-7684-46bc-b70f-fcf67b0e27bd">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">group_id</span>  <span class="n">num_user_click</span>  <span class="n">num_user_exposed</span>
-<span class="mi">0</span>         <span class="mi">0</span>              <span class="mi">24</span>                <span class="mi">24</span>
-<span class="mi">1</span>         <span class="mi">1</span>              <span class="mi">39</span>                <span class="mi">39</span>
-<span class="mi">2</span>         <span class="mi">2</span>              <span class="mi">37</span>                <span class="mi">37</span>
-</pre></div>
-</div>
+<p><strong>The new UI design for the trending section has a positive and significant impact on the click-through rate, increasing it by approximately 10.43%.</strong> This improvement suggests that the redesigned trending section is more effective at attracting users and encouraging them to engage with the displayed items.</p>
 </div>
 </div>
 </div>

@@ -86,7 +86,7 @@ def z_test_proportions(x_A, n_A, x_B, n_B, alpha=0.05):
         'Z-score': Z,
         'p-value': p_value,
         '95% CI': confidence_interval,
-        'Significant?': is_significant
+        'is_significant': is_significant
     }
   
   
