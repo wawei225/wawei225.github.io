@@ -7508,22 +7508,7 @@ a.anchor-link {
 </style>
 <!-- End of mermaid configuration --></head>
 <body class="jp-Notebook" data-jp-theme-light="true" data-jp-theme-name="JupyterLab Light">
-<main><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=f3d7b07d-7011-459c-9f62-2aa2dc353e74">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [1]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">sqlite3</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
+<main>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=664dacc2-368e-44e9-a0e4-18451cd8f2b9">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -7555,6 +7540,21 @@ a.anchor-link {
 <li><p><strong>Page Interaction</strong>: It is essential that users have interacted with the "Trending" section on the home page. This interaction is crucial as it directly relates to the experiment's area of study, potentially affecting user behavior and engagement metrics.</p>
 </li>
 </ol>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=f3d7b07d-7011-459c-9f62-2aa2dc353e74">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [3]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">sqlite3</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</pre></div>
+</div>
 </div>
 </div>
 </div>
@@ -7630,12 +7630,12 @@ a.anchor-link {
 <span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">":memory:"</span><span class="p">)</span>  <span class="c1"># Uses in-memory storage (free and fast)</span>
 <span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
 
-<span class="c1"># Step 3: Store DataFrames as SQL tables</span>
+<span class="c1">#Store DataFrames as SQL tables</span>
 <span class="n">experiment_df</span><span class="o">.</span><span class="n">to_sql</span><span class="p">(</span><span class="s2">"experiment"</span><span class="p">,</span> <span class="n">conn</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">if_exists</span><span class="o">=</span><span class="s2">"replace"</span><span class="p">)</span>
 <span class="n">user_df</span><span class="o">.</span><span class="n">to_sql</span><span class="p">(</span><span class="s2">"user"</span><span class="p">,</span> <span class="n">conn</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">if_exists</span><span class="o">=</span><span class="s2">"replace"</span><span class="p">)</span>
 <span class="n">event_df</span><span class="o">.</span><span class="n">to_sql</span><span class="p">(</span><span class="s2">"event"</span><span class="p">,</span> <span class="n">conn</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">if_exists</span><span class="o">=</span><span class="s2">"replace"</span><span class="p">)</span>
 
-<span class="c1"># Step 4: Run SQL queries for data cleaning (example: removing duplicates)</span>
+<span class="c1">#Run SQL queries for data cleaning </span>
 <span class="n">TA_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql_query</span><span class="p">(</span><span class="s2">"""</span>
 
 <span class="s2">with TA as (</span>
@@ -7669,10 +7669,8 @@ a.anchor-link {
 
 <span class="s2">"""</span><span class="p">,</span> <span class="n">conn</span><span class="p">)</span>
 
-<span class="c1"># Step 5: Retrieve and process cleaned data</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">TA_df</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
 
-<span class="c1"># Close connection when done</span>
 <span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -7769,22 +7767,22 @@ a.anchor-link {
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=edec23c8-7e4a-47b0-a2a0-19ce8e563edd">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=edec23c8-7e4a-47b0-a2a0-19ce8e563edd">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [12]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Step 2: Create SQLite in-memory database</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1">#Create SQLite in-memory database</span>
 <span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">":memory:"</span><span class="p">)</span>  <span class="c1"># Uses in-memory storage (free and fast)</span>
 <span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
 
-<span class="c1"># Step 3: Store DataFrames as SQL tables</span>
+<span class="c1">#Store DataFrames as SQL tables</span>
 <span class="n">TA_df</span><span class="o">.</span><span class="n">to_sql</span><span class="p">(</span><span class="s2">"ta_df"</span><span class="p">,</span> <span class="n">conn</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">if_exists</span><span class="o">=</span><span class="s2">"replace"</span><span class="p">)</span>
 
-<span class="c1"># Step 4: Run SQL queries for data cleaning (example: removing duplicates)</span>
+<span class="c1">#Run SQL queries for data cleaning</span>
 <span class="n">general_metric</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql_query</span><span class="p">(</span><span class="s2">"""</span>
 
 <span class="s2">    select </span>
@@ -7802,38 +7800,20 @@ a.anchor-link {
 
 <span class="s2">"""</span><span class="p">,</span> <span class="n">conn</span><span class="p">)</span>
 
-<span class="c1"># Step 5: Retrieve and process cleaned data</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">general_metric</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
 
-<span class="c1"># Close connection when done</span>
 <span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>   group_id  num_user_click  num_user_exposed
-0         0            7568             24710
-1         1            7510             24622
-2         2           15184             50668
-</pre>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=21f1c12e-d12c-4d0f-8ae8-4413c58f28d4">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=21f1c12e-d12c-4d0f-8ae8-4413c58f28d4">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [13]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">test_funcs</span> <span class="kn">import</span> <span class="n">z_test_proportions</span>
@@ -7844,19 +7824,6 @@ a.anchor-link {
                             <span class="n">general_metric</span><span class="p">[</span><span class="n">general_metric</span><span class="p">[</span><span class="s1">'group_id'</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">][</span><span class="s1">'num_user_exposed'</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
 </pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>{'CTR_A': 0.3062727640631323, 'CTR_B': 0.30501177808463975, 'CTR_Difference': -0.001260985978492557, 'Z-score': -0.3039800897510471, 'p-value': 0.7611430599205433, '95% CI': (-0.00939141026016016, 0.006869438303175046), 'is_significant': False}
-</pre>
 </div>
 </div>
 </div>
@@ -7872,22 +7839,22 @@ a.anchor-link {
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=2feb20d3-8cb5-4d86-aa95-1847df11e088">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=2feb20d3-8cb5-4d86-aa95-1847df11e088">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [15]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Step 2: Create SQLite in-memory database</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1">#Create SQLite in-memory database</span>
 <span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">":memory:"</span><span class="p">)</span>  <span class="c1"># Uses in-memory storage (free and fast)</span>
 <span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
 
-<span class="c1"># Step 3: Store DataFrames as SQL tables</span>
+<span class="c1">#Store DataFrames as SQL tables</span>
 <span class="n">TA_df</span><span class="o">.</span><span class="n">to_sql</span><span class="p">(</span><span class="s2">"ta_df"</span><span class="p">,</span> <span class="n">conn</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">if_exists</span><span class="o">=</span><span class="s2">"replace"</span><span class="p">)</span>
 
-<span class="c1"># Step 4: Run SQL queries for data cleaning (example: removing duplicates)</span>
+<span class="c1">#Run SQL queries for data cleaning</span>
 <span class="n">success_metric</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql_query</span><span class="p">(</span><span class="s2">"""</span>
 
 <span class="s2">    select </span>
@@ -7905,37 +7872,20 @@ a.anchor-link {
 
 <span class="s2">"""</span><span class="p">,</span> <span class="n">conn</span><span class="p">)</span>
 
-<span class="c1"># Step 5: Retrieve and process cleaned data</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">success_metric</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
 
-<span class="c1"># Close connection when done</span>
 <span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>   group_id  num_user_click  num_user_exposed
-0         1           14694             49332
-1         2           20376             50668
-</pre>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=d19a943f-e11a-4875-89b7-f98b674af544">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=d19a943f-e11a-4875-89b7-f98b674af544">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [16]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">z_test_proportions</span><span class="p">(</span><span class="n">success_metric</span><span class="p">[</span><span class="n">success_metric</span><span class="p">[</span><span class="s1">'group_id'</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">][</span><span class="s1">'num_user_click'</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span>
@@ -7944,19 +7894,6 @@ a.anchor-link {
                             <span class="n">success_metric</span><span class="p">[</span><span class="n">success_metric</span><span class="p">[</span><span class="s1">'group_id'</span><span class="p">]</span><span class="o">==</span><span class="mi">2</span><span class="p">][</span><span class="s1">'num_user_exposed'</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
 </pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>{'CTR_A': 0.29785940160544877, 'CTR_B': 0.4021473119128444, 'CTR_Difference': 0.10428791030739565, 'Z-score': 34.55211394502931, 'p-value': 0.0, '95% CI': (0.09837219271770982, 0.11020362789708148), 'is_significant': True}
-</pre>
 </div>
 </div>
 </div>
