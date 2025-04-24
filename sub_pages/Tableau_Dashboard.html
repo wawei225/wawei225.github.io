@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AWS SaaS Sales Dashboard</title>
+    <link rel="stylesheet" href="../styles/css/styles.css">
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+        </script>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="main-header">
+        <div class="logo">
+            <a href="../index.html" class="logo-link">
+                <img src="../styles/images/export.jpeg" alt="Logo Image" class="logo-img">
+                Jerry Huang
+            </a>
+        </div>
+        <button class="menu-toggle" aria-label="Toggle Navigation">
+            ☰
+        </button>
+        <nav class="nav-links">
+            <ul>
+                <li><a href="../index.html#projects">Projects</a></li>
+                <li><a href="../sub_pages/photography.html" class="current">Photography</a></li>
+                <li>
+                    <a href="sub_pages/ABtesting.html" class="current">A/B Testing Tool</a>
+                    <span style="color: #118B50; font-weight: bold;font-size: 0.7em; margin-left: 5px;">(Work in
+                        Process)</span>
+                </li> <!--<li><a href="#blogs">Blogs</a></li> -->
+                <!--<li><a href="#blogs">Blogs</a></li> -->
+                <li><a href="../index.html#about-me">About Me</a></li>
+                <li><a href="../index.html#contacts">Contacts</a></li>
+            </ul>
+        </nav>
+    </header>
+
+
+    <main>
+        <section id="background">
+            <h1 class="page-title">AWS SaaS Sales Dashboard</h1>
+            <div class="tab-buttons">
+                <button class="tab-button active" data-tab="tab1">Background and Data</button>
+                <button class="tab-button" data-tab="tab2">Dashboard</button>
+            </div>
+
+
+            <div class="tab-content active" id="tab1-content">
+
+                <h1 class="section-title-report">Introduction</h1>
+                <p>
+                    This dashboard was created using Tableau to build insightful, interactive dashboards using
+                    real-world data. The goal is to provide a clear and dynamic overview of sales performance across
+                    various dimensions such as time, location, industry, and product type. Key metrics like total sales,
+                    orders, and customer insights are visualized to support strategic decision-making.
+                </p>
+
+                <h1 class="section-title-report">Data Source</h1>
+                <p>
+                    The raw data used in this dashboard comes from a SaaS sales dataset available on Kaggle
+                    (<a href="https://www.kaggle.com/datasets/nnthanh101/aws-saas-sales?resource=download"
+                        target="_blank">AWS SaaS Sales Dataset</a>).
+                    It contains detailed records of customer transactions, including the following columns:
+                </p>
+
+
+
+                <section style="align: center">
+                    <table border="1" cellpadding="8" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Column Name</th>
+                                <th>Column Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Row ID</td>
+                                <td>A unique identifier for each transaction.</td>
+                            </tr>
+                            <tr>
+                                <td>Order ID</td>
+                                <td>A unique identifier for each order.</td>
+                            </tr>
+                            <tr>
+                                <td>Order Date</td>
+                                <td>The date when the order was placed.</td>
+                            </tr>
+                            <tr>
+                                <td>Date Key</td>
+                                <td>A numerical representation of the order date (YYYYMMDD).</td>
+                            </tr>
+                            <tr>
+                                <td>Contact Name</td>
+                                <td>The name of the person who placed the order.</td>
+                            </tr>
+                            <tr>
+                                <td>Country</td>
+                                <td>The country where the order was placed.</td>
+                            </tr>
+                            <tr>
+                                <td>City</td>
+                                <td>The city where the order was placed.</td>
+                            </tr>
+                            <tr>
+                                <td>Region</td>
+                                <td>The region where the order was placed.</td>
+                            </tr>
+                            <tr>
+                                <td>Subregion</td>
+                                <td>The subregion where the order was placed.</td>
+                            </tr>
+                            <tr>
+                                <td>Customer</td>
+                                <td>The name of the company that placed the order.</td>
+                            </tr>
+                            <tr>
+                                <td>Customer ID</td>
+                                <td>A unique identifier for each customer.</td>
+                            </tr>
+                            <tr>
+                                <td>Industry</td>
+                                <td>The industry the customer belongs to.</td>
+                            </tr>
+                            <tr>
+                                <td>Segment</td>
+                                <td>The customer segment (SMB, Strategic, Enterprise, etc.).</td>
+                            </tr>
+                            <tr>
+                                <td>Product</td>
+                                <td>The product that was ordered.</td>
+                            </tr>
+                            <tr>
+                                <td>License</td>
+                                <td>The license key for the product.</td>
+                            </tr>
+                            <tr>
+                                <td>Sales</td>
+                                <td>The total sales amount for the transaction.</td>
+                            </tr>
+                            <tr>
+                                <td>Quantity</td>
+                                <td>The total number of items in the transaction.</td>
+                            </tr>
+                            <tr>
+                                <td>Discount</td>
+                                <td>The discount applied to the transaction.</td>
+                            </tr>
+                            <tr>
+                                <td>Profit</td>
+                                <td>The profit from the transaction.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </section>
+
+
+
+            </div>
+
+            <div class="tab-content" id="tab2-content" style="max-width: 100%;">
+                <h1 class="page-title">Suggested view in full screen</h1>
+
+                <div class='tableauPlaceholder' id='viz1745455315424' style="position: relative; width: 100%; height: 0; padding-bottom: 75%; overflow: hidden;"><noscript><a
+                            href='#'><img alt='Dashboard 2 '
+                                src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;AW&#47;AWSSaaSSalesDashboard&#47;Dashboard2&#47;1_rss.png'
+                                style='border: none' /></a></noscript><object class='tableauViz' style='display:none;'>
+                        <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+                        <param name='embed_code_version' value='3' />
+                        <param name='site_root' value='' />
+                        <param name='name' value='AWSSaaSSalesDashboard&#47;Dashboard2' />
+                        <param name='tabs' value='no' />
+                        <param name='toolbar' value='yes' />
+                        <param name='static_image'
+                            value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;AW&#47;AWSSaaSSalesDashboard&#47;Dashboard2&#47;1.png' />
+                        <param name='animate_transition' value='yes' />
+                        <param name='display_static_image' value='yes' />
+                        <param name='display_spinner' value='yes' />
+                        <param name='display_overlay' value='yes' />
+                        <param name='display_count' value='yes' />
+                        <param name='language' value='en-US' />
+                        <param name='filter' value='publish=yes' />
+                    </object></div>
+                <script
+                    type='text/javascript'>                    var divElement = document.getElementById('viz1745455315424'); var vizElement = divElement.getElementsByTagName('object')[0]; if (divElement.offsetWidth > 800) { vizElement.style.width = '100%'; vizElement.style.height = (divElement.offsetWidth * 0.75) + 'px'; } else if (divElement.offsetWidth > 500) { vizElement.style.width = '100%'; vizElement.style.height = (divElement.offsetWidth * 0.75) + 'px'; } else { vizElement.style.width = '100%'; vizElement.style.height = '2327px'; } var scriptElement = document.createElement('script'); scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js'; vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+
+            </div>
+
+            <div class="tab-content" id="tab3-content">
+
+                <iframe src="../ab_testing_simulation/AB_Testing.html" width="100%" height="600px"></iframe>
+
+            </div>
+
+        </section>
+
+
+        <!-- Footer -->
+        <footer id="footer">
+            <p>Copyright &#169; 2025 Jerry Huang. All Rights Reserved.</p>
+        </footer>
+
+
+    </main>
+
+    <script src="../styles/java/script.js"></script>
+
+</body>
+
+</html>
